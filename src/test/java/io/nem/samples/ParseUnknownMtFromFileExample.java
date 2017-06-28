@@ -20,7 +20,7 @@ public class ParseUnknownMtFromFileExample {
 		/*
 		 * Read and parse the file content into a SWIFT message object
 		 */
-		AbstractMT msg = AbstractMT.parse(new File("src/mt103.txt"));
+		AbstractMT msg = AbstractMT.parse(new File("src/test/resources/mt103.txt"));
 		
 		/*
 		 * Print header information
