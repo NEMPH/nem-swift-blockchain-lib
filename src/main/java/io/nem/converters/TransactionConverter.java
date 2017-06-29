@@ -5,9 +5,8 @@ import java.io.IOException;
 import com.prowidesoftware.swift.io.parser.SwiftParser;
 import com.prowidesoftware.swift.model.SwiftMessage;
 import com.prowidesoftware.swift.model.mt.AbstractMT;
-import io.nem.parsers.BlockchainParser;
 
-public class Converter {
+public class TransactionConverter {
 
 	public static String toAsciiText(String swiftMessage) {
 
@@ -16,11 +15,7 @@ public class Converter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		BlockchainParser blockchainParser = BlockchainParser.getInstance();
-
-		// parsers
-		return blockchainParser.parse(swiftMessage).toTextAscii();
-
+		return swiftMessage;
 	}
 
 	public static SwiftMessage toSwiftMessage(String asciiText) {
