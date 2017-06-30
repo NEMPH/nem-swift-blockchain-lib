@@ -9,6 +9,7 @@ import com.prowidesoftware.swift.model.SwiftMessage;
 import com.prowidesoftware.swift.model.Tag;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 
+// TODO: Auto-generated Javadoc
 /**
  * This example shows how to read a SWIFT MT message from a file, in the context where
  * the message type to parse is unknown and also it can be a system message.
@@ -19,6 +20,12 @@ import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
  */
 public class ParseUnknownMessageFromFileExample {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
 		/*
 		 * Read the file and create an instance of the generic parser for it

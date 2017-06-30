@@ -10,6 +10,7 @@ import com.prowidesoftware.swift.model.field.Field32A;
 import com.prowidesoftware.swift.model.field.Field57A;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 
+// TODO: Auto-generated Javadoc
 /**
  * This example shows how to modify specific content from a SWIFT MT message read from file.
  * 
@@ -39,6 +40,12 @@ import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
  */
 public class MessageModificationExample {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
 		/*
 		 * Read and parse the file content into a SWIFT message object

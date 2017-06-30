@@ -10,6 +10,7 @@ import com.prowidesoftware.swift.model.field.Field32A;
 import com.prowidesoftware.swift.model.mt.AbstractMT;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 
+// TODO: Auto-generated Javadoc
 /**
  * This example shows how to read a SWIFT MT message from an DOS-PPC file.
  * The example file used contains two MT103 messages.
@@ -22,6 +23,12 @@ import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
  */
 public class ReadDOSPCCFileExample {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
 		/*
 		 * Read and parse the file content into a SWIFT message object

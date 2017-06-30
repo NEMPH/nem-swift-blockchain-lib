@@ -1,4 +1,4 @@
-package io.nem.service;
+package io.nem.factories;
 
 import org.nem.core.connect.ErrorResponseDeserializerUnion;
 import org.nem.core.connect.HttpMethodClient;
@@ -6,9 +6,19 @@ import org.nem.core.connect.client.DefaultAsyncNemConnector;
 import org.nem.core.model.Account;
 import org.nem.core.node.ApiId;
 
+/**
+ * A factory for creating Connector objects.
+ */
 public class ConnectorFactory {
+	
+	/** The Constant CLIENT. */
 	private static final HttpMethodClient<ErrorResponseDeserializerUnion> CLIENT = createHttpMethodClient();
 
+	/**
+	 * Creates a new Connector object.
+	 *
+	 * @return the default async nem connector< api id>
+	 */
 	public static DefaultAsyncNemConnector<ApiId> createConnector() {
 		final DefaultAsyncNemConnector<ApiId> connector = new DefaultAsyncNemConnector<>(CLIENT, r -> {
 			throw new RuntimeException();
@@ -17,6 +27,11 @@ public class ConnectorFactory {
 		return connector;
 	}
 
+	/**
+	 * Creates a new Connector object.
+	 *
+	 * @return the http method client< error response deserializer union>
+	 */
 	private static HttpMethodClient<ErrorResponseDeserializerUnion> createHttpMethodClient() {
 		final int connectionTimeout = 4000;
 		final int socketTimeout = 10000;

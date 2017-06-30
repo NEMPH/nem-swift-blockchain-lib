@@ -23,6 +23,7 @@ import com.prowidesoftware.swift.model.field.Field98A;
 import com.prowidesoftware.swift.model.mt.mt5xx.MT542;
 import com.prowidesoftware.swift.model.mt.mt5xx.MT542.SequenceA;
 
+// TODO: Auto-generated Javadoc
 /**
  * Example of message creation using a specific MTnnn class and the Sequences API. 
  * An MT542 is created and converted to the SWIFT FIN format.
@@ -76,6 +77,9 @@ public class MessageCreation2Example {
 
     /**
      * This example creates a new MT103 using MT and Field helper classes.
+     *
+     * @param args the arguments
+     * @throws Exception the exception
      */
     public static void main(String[] args) throws Exception {
 		/*

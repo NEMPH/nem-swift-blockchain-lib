@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.prowidesoftware.swift.io.parser.SwiftParser;
 import com.prowidesoftware.swift.model.SwiftMessage;
 
+// TODO: Auto-generated Javadoc
 /**
  * Example of message conversion to JSON representation.
  * 
@@ -72,6 +73,12 @@ import com.prowidesoftware.swift.model.SwiftMessage;
  */
 public class MessageToJsonExample {
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public static void main(String[] args) throws IOException {
 		/*
 		 * This will be published in version 7.5 of CORE

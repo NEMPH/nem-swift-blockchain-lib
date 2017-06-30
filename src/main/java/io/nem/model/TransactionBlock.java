@@ -6,58 +6,132 @@ import org.nem.core.model.Account;
 import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.time.TimeInstant;
 
+/**
+ * The Class TransactionBlock.
+ */
 public class TransactionBlock implements Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The sender. */
 	private Account sender;
+	
+	/** The recipient. */
 	private Account recipient;
+	
+	/** The amount. */
 	private Long amount;
+	
+	/** The attachment. */
 	private TransferTransactionAttachment attachment;
+	
+	private String payload;
+	
+	/** The time instant. */
 	private TimeInstant timeInstant;
 
+	/**
+	 * Gets the sender.
+	 *
+	 * @return the sender
+	 */
 	public Account getSender() {
 		return sender;
 	}
 
+	/**
+	 * Sets the sender.
+	 *
+	 * @param sender the new sender
+	 */
 	public void setSender(Account sender) {
 		this.sender = sender;
 	}
 
+	/**
+	 * Gets the recipient.
+	 *
+	 * @return the recipient
+	 */
 	public Account getRecipient() {
 		return recipient;
 	}
 
+	/**
+	 * Sets the recipient.
+	 *
+	 * @param recipient the new recipient
+	 */
 	public void setRecipient(Account recipient) {
 		this.recipient = recipient;
 	}
 
+	/**
+	 * Gets the amount.
+	 *
+	 * @return the amount
+	 */
 	public Long getAmount() {
 		return amount;
 	}
 
+	/**
+	 * Sets the amount.
+	 *
+	 * @param amount the new amount
+	 */
 	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
+	/**
+	 * Gets the attachment.
+	 *
+	 * @return the attachment
+	 */
 	public TransferTransactionAttachment getAttachment() {
 		return attachment;
 	}
 
+	/**
+	 * Sets the attachment.
+	 *
+	 * @param attachment the new attachment
+	 */
 	public void setAttachment(TransferTransactionAttachment attachment) {
 		this.attachment = attachment;
 	}
 
+	/**
+	 * Gets the time instant.
+	 *
+	 * @return the time instant
+	 */
 	public TimeInstant getTimeInstant() {
 		return timeInstant;
 	}
 
+	public String getPayload() {
+		return payload;
+	}
+
+	public void setPayload(String payload) {
+		this.payload = payload;
+	}
+
+	/**
+	 * Sets the time instant.
+	 *
+	 * @param timeInstant the new time instant
+	 */
 	public void setTimeInstant(TimeInstant timeInstant) {
 		this.timeInstant = timeInstant;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

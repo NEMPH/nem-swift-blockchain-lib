@@ -9,6 +9,7 @@ import com.prowidesoftware.swift.io.parser.SwiftParser;
 import com.prowidesoftware.swift.model.SwiftMessage;
 import com.prowidesoftware.swift.model.mt.mt9xx.MT940;
 
+// TODO: Auto-generated Javadoc
 /**
  * There is a frequent misunderstanding of the FIN messages format when the actual message
  * is preceded by a system ACK, and the expected behavior of Prowide Core parser when reading
@@ -33,6 +34,12 @@ import com.prowidesoftware.swift.model.mt.mt9xx.MT940;
  */
 public class ParseMessageWithAckExample {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
 		final String fin = "{1:F21FOOLHKH0AXXX0304009999}{4:{177:1608140809}{451:0}}{1:F01FOOLHKH0AXXX0304009999}{2:O9401609160814FOOLHKH0AXXX03040027341608141609N}{4:\n"+
 			":20:USD940NO1\n"+

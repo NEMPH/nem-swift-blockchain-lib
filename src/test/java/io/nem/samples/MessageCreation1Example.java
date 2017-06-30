@@ -13,6 +13,7 @@ import com.prowidesoftware.swift.model.field.Field59;
 import com.prowidesoftware.swift.model.field.Field71A;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 
+// TODO: Auto-generated Javadoc
 /**
  * Example of a simple message creation using a specific MTnnn class. 
  * An MT103 is created and converted to the SWIFT FIN format.
@@ -37,6 +38,9 @@ public class MessageCreation1Example {
 
     /**
      * This example creates a new MT103 using MT and Field helper classes.
+     *
+     * @param args the arguments
+     * @throws Exception the exception
      */
     public static void main(String[] args) throws Exception {
 		/*

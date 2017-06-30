@@ -3,6 +3,7 @@ package io.nem.samples;
 
 import com.prowidesoftware.swift.io.ConversionService;
 
+// TODO: Auto-generated Javadoc
 /**
  * Example of message conversion to XML representation. Notice this is not SWIFT
  * MX format, but the internal/proprietary XML representation defined at WIFE.
@@ -91,6 +92,11 @@ import com.prowidesoftware.swift.io.ConversionService;
  */
 public class MessageRichXMLConversionExample {
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args) {
 		ConversionService srv = new ConversionService();
 		String fin = "{1:F01BICFOOYYAXXX8683497519}{2:O1031535051028ESPBESMMAXXX54237522470510281535N}{3:{113:ROMF}{108:0510280182794665}{119:STP}}{4:\n"

@@ -9,6 +9,7 @@ import com.prowidesoftware.swift.model.field.Field77E;
 import com.prowidesoftware.swift.model.mt.mt7xx.MT700;
 import com.prowidesoftware.swift.model.mt.mt7xx.MT798;
 
+// TODO: Auto-generated Javadoc
 /**
  * Example of message creation using a specific MTnnn class and appenders
  * to create a free format message. 
@@ -32,8 +33,11 @@ import com.prowidesoftware.swift.model.mt.mt7xx.MT798;
 public class MessageCreationPropietaryMessageMT798 {
     
 	/**
-     * This example creates a new MT798 using MT and Field helper classes.
-     */
+	 * This example creates a new MT798 using MT and Field helper classes.
+	 *
+	 * @param args the arguments
+	 * @throws Exception the exception
+	 */
     public static void main(String[] args) throws Exception {
 		/*
 		 * Create the MT class, it will be initialized as an outgoing message

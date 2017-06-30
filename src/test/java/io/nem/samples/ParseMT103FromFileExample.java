@@ -10,6 +10,7 @@ import com.prowidesoftware.swift.model.field.Field20;
 import com.prowidesoftware.swift.model.field.Field32A;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 
+// TODO: Auto-generated Javadoc
 /**
  * This example shows how to read a SWIFT MT message from a file, in the context where
  * the message type to parse is already known, in the example we use an MT 103.
@@ -28,6 +29,12 @@ Amount: EUR 100000,
  */
 public class ParseMT103FromFileExample {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
 		/*
 		 * Read and parse the file content into a SWIFT message object

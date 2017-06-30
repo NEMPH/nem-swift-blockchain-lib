@@ -8,6 +8,7 @@ import com.prowidesoftware.swift.model.field.Field20;
 import com.prowidesoftware.swift.model.field.Field61;
 import com.prowidesoftware.swift.model.mt.mt9xx.MT940;
 
+// TODO: Auto-generated Javadoc
 /**
  * This example shows how to read a SWIFT MT message from a String, in the context where
  * the message type to parse is already known, in the example we use an MT 940.
@@ -30,6 +31,12 @@ Reference Acc Owner: 50RS201403240008
  */
 public class ParseMT940FromStringExample {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
         /*
          * A simple String containing the message content to parse

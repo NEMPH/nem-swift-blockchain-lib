@@ -9,6 +9,7 @@ import com.prowidesoftware.swift.model.field.Field20;
 import com.prowidesoftware.swift.model.field.Field21A;
 import com.prowidesoftware.swift.model.mt.mt7xx.MT798;
 
+// TODO: Auto-generated Javadoc
 /**
  * This example shows how to read a proprietary SWIFT MT message from a String.
  * In the example we use an MT 798 with an inner MT 700.
@@ -35,6 +36,13 @@ Related Sequence Reference: AA2015-99
  * @since 7.7
  */
 public class ParseProprietaryMessageMT798 {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
         /*
          * A simple String containing the message content to parse

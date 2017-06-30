@@ -6,6 +6,7 @@ import com.prowidesoftware.swift.model.field.Field20C;
 import com.prowidesoftware.swift.model.field.Field23G;
 import com.prowidesoftware.swift.model.mt.mt5xx.MT548;
 
+// TODO: Auto-generated Javadoc
 /**
  * Example of message creation using a specific MTnnn class, the Sequences API and
  * nested subsequences. 
@@ -16,6 +17,11 @@ import com.prowidesoftware.swift.model.mt.mt5xx.MT548;
  */
 public class MessageCreationSequenceExampleMT548 {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		new MT548().append(MT548.SequenceA.newInstance(
 				/* full content of sequence A here 

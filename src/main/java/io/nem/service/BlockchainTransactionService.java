@@ -1,6 +1,5 @@
 package io.nem.service;
 
-import java.security.SecureRandom;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
@@ -11,7 +10,6 @@ import org.nem.core.model.NetworkInfos;
 import org.nem.core.model.Transaction;
 import org.nem.core.model.TransferTransaction;
 import org.nem.core.model.TransferTransactionAttachment;
-import org.nem.core.model.mosaic.Mosaic;
 import org.nem.core.model.ncc.NemAnnounceResult;
 import org.nem.core.model.ncc.RequestAnnounce;
 import org.nem.core.model.primitive.Amount;
@@ -23,13 +21,13 @@ import org.nem.core.time.TimeInstant;
 /**
  * The Class TransactionService.
  */
-public class TransactionService {
+public class BlockchainTransactionService {
 
 	/** The Constant LOGGER. */
-	private static final Logger LOGGER = Logger.getLogger(TransactionService.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(BlockchainTransactionService.class.getName());
 
 	static {
-		NetworkInfos.setDefault(NetworkInfos.fromFriendlyName("mijinnet"));
+		NetworkInfos.setDefault(NetworkInfos.fromFriendlyName("testnet"));
 	}
 
 	/**
@@ -44,8 +42,9 @@ public class TransactionService {
 		final Transaction transaction = createTransaction(Globals.TIME_PROVIDER.getCurrentTime(), sender, recipient,
 				amount, null);
 		final byte[] data = BinarySerializer.serializeToBytes(transaction.asNonVerifiable());
+
 		final RequestAnnounce request = new RequestAnnounce(data, transaction.getSignature().getBytes());
-		final CompletableFuture<Deserializer> future = send(Globals.MIJIN_NODE_ENDPOINT, request);
+		final CompletableFuture<Deserializer> future = send(Globals.NODE_ENDPOINT, request);
 		future.thenAccept(d -> {
 			final NemAnnounceResult result = new NemAnnounceResult(d);
 			switch (result.getCode()) {
@@ -75,30 +74,34 @@ public class TransactionService {
 	 */
 	public static void createAndSendTransaction(final Account sender, final Account recipient, final long amount,
 			final TransferTransactionAttachment attachment) {
-
+		
 		final Transaction transaction = createTransaction(Globals.TIME_PROVIDER.getCurrentTime(), sender, recipient,
 				amount, attachment);
-		final Mosaic mosaic = attachment.getMosaics().stream().findFirst().get();
+		
 		final byte[] data = BinarySerializer.serializeToBytes(transaction.asNonVerifiable());
 		final RequestAnnounce request = new RequestAnnounce(data, transaction.getSignature().getBytes());
-		final CompletableFuture<Deserializer> future = send(Globals.MIJIN_NODE_ENDPOINT, request);
+
+		final CompletableFuture<Deserializer> future = send(Globals.NODE_ENDPOINT, request);
 		future.thenAccept(d -> {
 			final NemAnnounceResult result = new NemAnnounceResult(d);
 			switch (result.getCode()) {
 			case 1:
-				LOGGER.info(String.format("successfully send %d %s from %s to %s", mosaic.getQuantity().getRaw(),
-						mosaic.getMosaicId(), sender.getAddress(), recipient.getAddress()));
+				LOGGER.info(String.format("successfully send %d from %s to %s", amount,
+						sender.getAddress(), recipient.getAddress()));
 				break;
 			default:
-				LOGGER.warning(String.format("could not send %s from %s to %s, reason: %s", mosaic.getMosaicId(),
+				LOGGER.warning(String.format("could not send %d from %s to %s, reason: %s", amount,
 						sender.getAddress(), recipient.getAddress(), result.getMessage()));
 			}
 		}).exceptionally(e -> {
-			LOGGER.warning(String.format("could not send %s from %s to %s, reason: %s", mosaic.getMosaicId(),
+			
+			LOGGER.warning(String.format("could not send %s from %s to %s, reason: %s", attachment.getMessage(),
 					sender.getAddress(), recipient.getAddress().getEncoded(), e.getMessage()));
+			
 			return null;
 		}).join();
 	}
+	
 
 	/**
 	 * Creates the transaction.
