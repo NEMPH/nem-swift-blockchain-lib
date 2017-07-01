@@ -7,6 +7,7 @@ import org.nem.core.time.SystemTimeProvider;
 import org.nem.core.time.TimeProvider;
 
 import io.nem.factories.ConnectorFactory;
+import io.nem.util.AppPropertiesUtil;
 
 /**
  * The Class Globals.
@@ -16,8 +17,10 @@ public class Globals {
 	/** The Constant TIME_PROVIDER. */
 	public static final TimeProvider TIME_PROVIDER = new SystemTimeProvider();
 	
-	/** The Constant MIJIN_NODE_ENDPOINT. */
-	public static final NodeEndpoint NODE_ENDPOINT = new NodeEndpoint("http","50.3.87.123", 7890);
+	public static final NodeEndpoint NODE_ENDPOINT = new NodeEndpoint(
+			AppPropertiesUtil.getProperty("node.endpoint.protocol"),
+			AppPropertiesUtil.getProperty("node.endpoint.uri"), 
+			Integer.valueOf(AppPropertiesUtil.getProperty("node.endpoint.port")));
 	
 	/** The Constant CONNECTOR. */
 	public static final DefaultAsyncNemConnector<ApiId> CONNECTOR = ConnectorFactory.createConnector();

@@ -1,29 +1,38 @@
 package io.nem.main;
-
 import org.junit.Test;
 import org.nem.core.messages.SecureMessage;
 import org.nem.core.model.Account;
-
-import io.nem.builders.BlockchainTransactionBuilder;
+import io.nem.builders.SwiftBlockchainTransactionBuilder;
 import io.nem.factories.AttachmentFactory;
 import io.nem.factories.EntityFactory;
+import io.nem.model.TransactionMessageType;
 
 /**
  * The Class BuildTransactionTest.
  */
 public class BuildTransactionTest {
 
-	private String sampleSwiftMsg = "{1:F01BICFOOYYAXXX8683497519}{2:O1031535051028ESPBESMMAXXX54237522470510281535N}{3:{113:ROMF}{108:0510280182794665}{119:STP}}{4: :20:0061350113089908 :13C:/RNCTIME/1534+0000 :23B:CRED :23E:SDVA :32A:061028EUR100000, :33B:EUR100000, :50K:/12345678 AGENTES DE BOLSA FOO AGENCIA AV XXXXX 123 BIS 9 PL 12345 BARCELONA :52A:/2337 FOOAESMMXXX :53A:FOOAESMMXXX :57A:BICFOOYYXXX :59:/ES0123456789012345671234 FOO AGENTES DE BOLSA ASOC :71A:OUR :72:/BNF/TRANSF. BCO. FOO -}{5:{MAC:88B4F929}{CHK:22EF370A4073}} ";
-	
-	
+	final String sampleSwiftMsg = "{1:F21FOOLHKH0AXXX0304009999}{4:{177:1608140809}{451:0}}{1:F01FOOLHKH0AXXX0304009999}{2:O9401609160814FOOLHKH0AXXX03040027341608141609N}{4:\n"+
+			":20:USD940NO1\n"+
+			":21:123456/DEV\n"+
+			":25:USD234567\n"+
+			":28C:1/1\n"+
+			":60F:C160418USD672,\n"+
+			":61:160827C642,S1032\n"+
+			":86:ANDY\n"+
+			":61:160827D42,S1032\n"+
+			":86:BANK CHARGES\n"+
+			":62F:C160418USD1872,\n"+
+			":64:C160418USD1872,\n"+
+			"-}{5:{CHK:0FEC1E4AEC53}{TNG:}}{S:{COP:S}}";
 	/**
 	 * Test cb build transaction.
 	 */
-	// @Test
+	@Test
 	public void testCbBuildTransaction() {
 
 		// Build a transaction.
-		BlockchainTransactionBuilder.getInstance().setAmount(2l)
+		SwiftBlockchainTransactionBuilder.getInstance().setAmount(2l)
 				.setRecipient(
 						EntityFactory.createAccount("498664896462446e683ecb04468c9d75807495f2bacf08a76ca90695a38c1539"))
 				.setSender(
@@ -31,11 +40,11 @@ public class BuildTransactionTest {
 				.buildTransaction(); // build only.
 	}
 
-	// @Test
+	@Test
 	public void testCbBuildAndSendTransactionWOAttachment() {
 		// Build a transaction and send it.
 		try {
-			BlockchainTransactionBuilder.getInstance().setAmount(0l)
+			SwiftBlockchainTransactionBuilder.getInstance().setAmount(1l)
 					.setRecipient(EntityFactory
 							.createAccount("498664896462446e683ecb04468c9d75807495f2bacf08a76ca90695a38c1539"))
 					.setSender(EntityFactory
@@ -52,21 +61,20 @@ public class BuildTransactionTest {
 	 */
 	@Test
 	public void testCbBuildAndSendSwiftStringTransaction() {
-		
-		// test from a string.
-		final Account senderAccount = EntityFactory
-				.createAccount("22fee844f2c07ce8b3f02b2373897f998ebd13f64db1ef96eb006cfd7d3c85e5");
-		final Account recipientAccount = EntityFactory
-				.createAccount("498664896462446e683ecb04468c9d75807495f2bacf08a76ca90695a38c1539");
-		
-		final SecureMessage message = SecureMessage.fromDecodedPayload(
-				senderAccount,
-				recipientAccount,
-				sampleSwiftMsg.getBytes());
+
 		// Build a transaction and send it.
 		try {
-			BlockchainTransactionBuilder.getInstance().setAmount(100l)
-					.setSender(senderAccount)
+
+			// test from a string.
+			final Account senderAccount = EntityFactory
+					.createAccount("22fee844f2c07ce8b3f02b2373897f998ebd13f64db1ef96eb006cfd7d3c85e5");
+			final Account recipientAccount = EntityFactory
+					.createAccount("498664896462446e683ecb04468c9d75807495f2bacf08a76ca90695a38c1539");
+
+			final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
+					sampleSwiftMsg.getBytes());
+
+			SwiftBlockchainTransactionBuilder.getInstance().setAmount(1l).setSender(senderAccount)
 					.setRecipient(recipientAccount)
 					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendTransaction(); // build and send it!
@@ -75,25 +83,22 @@ public class BuildTransactionTest {
 		}
 
 	}
-	
+
 	@Test
 	public void testCbBuildAndSendSwiftFileTransaction() {
-		
+
 		// test from a string.
 		final Account senderAccount = EntityFactory
 				.createAccount("22fee844f2c07ce8b3f02b2373897f998ebd13f64db1ef96eb006cfd7d3c85e5");
 		final Account recipientAccount = EntityFactory
 				.createAccount("498664896462446e683ecb04468c9d75807495f2bacf08a76ca90695a38c1539");
-		
-		final SecureMessage message = SecureMessage.fromDecodedPayload(
-				senderAccount,
-				recipientAccount,
+
+		final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
 				sampleSwiftMsg.getBytes());
 		// Build a transaction and send it.
 		try {
-			BlockchainTransactionBuilder.getInstance().setAmount(100l)
-					.setSender(senderAccount)
-					.setRecipient(recipientAccount)
+			SwiftBlockchainTransactionBuilder.getInstance().setAmount(10l).setSender(senderAccount)
+					.setRecipient(recipientAccount).setTransactionMessageType(TransactionMessageType.SWIFT)
 					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendTransaction(); // build and send it!
 		} catch (Exception e) {

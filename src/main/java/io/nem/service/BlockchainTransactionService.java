@@ -25,7 +25,7 @@ public class BlockchainTransactionService {
 
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(BlockchainTransactionService.class.getName());
-
+	
 	static {
 		NetworkInfos.setDefault(NetworkInfos.fromFriendlyName("testnet"));
 	}
@@ -122,7 +122,7 @@ public class BlockchainTransactionService {
 				Amount.fromMicroNem(amount), // amount in micro xem
 				attachment); // attachment (message, mosaics)
 		
-		transaction.setFee(Amount.fromNem(200));
+		transaction.setFee(Amount.fromNem(1));
 		transaction.setDeadline(timeInstant.addHours(23));
 		transaction.sign();
 		

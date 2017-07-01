@@ -1,6 +1,6 @@
-# Swift/Blockchain Converter
+# Swift / Blockchain Library
 
-Java library to convert Incoming Swift Message to Blockchain format and vice versa.
+Java library to convert and send Swift Messages to Blockchain and vice versa
 
 <h3>Usage</h3>
 

@@ -1,33 +1,33 @@
 package io.nem.builders;
 
-import org.nem.core.messages.SecureMessage;
 import org.nem.core.model.Account;
 import org.nem.core.model.Transaction;
 import org.nem.core.model.TransferTransactionAttachment;
 import io.nem.model.TransactionBlock;
+import io.nem.model.TransactionMessageType;
 import io.nem.service.Globals;
 import io.nem.service.BlockchainTransactionService;
 
 /**
  * The Class TransactionBuilder.
  */
-public class BlockchainTransactionBuilder {
+public class SwiftBlockchainTransactionBuilder {
 
 	/** The t block. */
 	private TransactionBlock tBlock = new TransactionBlock();
 
 	/** The instance. */
-	private static BlockchainTransactionBuilder instance;
+	private static SwiftBlockchainTransactionBuilder instance;
 
 	/**
 	 * Gets the single instance of TransactionBuilder.
 	 *
 	 * @return single instance of TransactionBuilder
 	 */
-	public static BlockchainTransactionBuilder getInstance() {
+	public static SwiftBlockchainTransactionBuilder getInstance() {
 		if (instance == null) {
 
-			return new BlockchainTransactionBuilder();
+			return new SwiftBlockchainTransactionBuilder();
 		}
 		return instance;
 	}
@@ -39,7 +39,7 @@ public class BlockchainTransactionBuilder {
 	 *            the sender
 	 * @return the transaction builder
 	 */
-	public BlockchainTransactionBuilder setSender(Account sender) {
+	public SwiftBlockchainTransactionBuilder setSender(Account sender) {
 		this.tBlock.setSender(sender);
 		return this;
 	}
@@ -51,7 +51,7 @@ public class BlockchainTransactionBuilder {
 	 *            the recipient
 	 * @return the transaction builder
 	 */
-	public BlockchainTransactionBuilder setRecipient(Account recipient) {
+	public SwiftBlockchainTransactionBuilder setRecipient(Account recipient) {
 		this.tBlock.setRecipient(recipient);
 		return this;
 	}
@@ -63,8 +63,13 @@ public class BlockchainTransactionBuilder {
 	 *            the amount
 	 * @return the transaction builder
 	 */
-	public BlockchainTransactionBuilder setAmount(Long amount) {
+	public SwiftBlockchainTransactionBuilder setAmount(Long amount) {
 		this.tBlock.setAmount(amount);
+		return this;
+	}
+
+	public SwiftBlockchainTransactionBuilder setTransactionMessageType(TransactionMessageType transactionMessageType) {
+		this.tBlock.setTransactionMessageType(transactionMessageType);
 		return this;
 	}
 
@@ -75,7 +80,7 @@ public class BlockchainTransactionBuilder {
 	 *            the attachment
 	 * @return the transaction builder
 	 */
-	public BlockchainTransactionBuilder setAttachment(TransferTransactionAttachment attachment) {
+	public SwiftBlockchainTransactionBuilder setAttachment(TransferTransactionAttachment attachment) {
 		this.tBlock.setAttachment(attachment);
 		return this;
 	}

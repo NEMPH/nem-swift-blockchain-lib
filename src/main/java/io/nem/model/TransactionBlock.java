@@ -13,21 +13,23 @@ public class TransactionBlock implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The sender. */
 	private Account sender;
-	
+
 	/** The recipient. */
 	private Account recipient;
-	
+
 	/** The amount. */
 	private Long amount;
-	
+
 	/** The attachment. */
 	private TransferTransactionAttachment attachment;
-	
+
 	private String payload;
 	
+	private TransactionMessageType transactionMessageType;
+
 	/** The time instant. */
 	private TimeInstant timeInstant;
 
@@ -43,7 +45,8 @@ public class TransactionBlock implements Serializable {
 	/**
 	 * Sets the sender.
 	 *
-	 * @param sender the new sender
+	 * @param sender
+	 *            the new sender
 	 */
 	public void setSender(Account sender) {
 		this.sender = sender;
@@ -61,7 +64,8 @@ public class TransactionBlock implements Serializable {
 	/**
 	 * Sets the recipient.
 	 *
-	 * @param recipient the new recipient
+	 * @param recipient
+	 *            the new recipient
 	 */
 	public void setRecipient(Account recipient) {
 		this.recipient = recipient;
@@ -79,7 +83,8 @@ public class TransactionBlock implements Serializable {
 	/**
 	 * Sets the amount.
 	 *
-	 * @param amount the new amount
+	 * @param amount
+	 *            the new amount
 	 */
 	public void setAmount(Long amount) {
 		this.amount = amount;
@@ -97,7 +102,8 @@ public class TransactionBlock implements Serializable {
 	/**
 	 * Sets the attachment.
 	 *
-	 * @param attachment the new attachment
+	 * @param attachment
+	 *            the new attachment
 	 */
 	public void setAttachment(TransferTransactionAttachment attachment) {
 		this.attachment = attachment;
@@ -123,13 +129,24 @@ public class TransactionBlock implements Serializable {
 	/**
 	 * Sets the time instant.
 	 *
-	 * @param timeInstant the new time instant
+	 * @param timeInstant
+	 *            the new time instant
 	 */
 	public void setTimeInstant(TimeInstant timeInstant) {
 		this.timeInstant = timeInstant;
 	}
 
-	/* (non-Javadoc)
+	public TransactionMessageType getTransactionMessageType() {
+		return transactionMessageType;
+	}
+
+	public void setTransactionMessageType(TransactionMessageType transactionMessageType) {
+		this.transactionMessageType = transactionMessageType;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -159,7 +176,7 @@ public class TransactionBlock implements Serializable {
 				return false;
 		} else if (!timeInstant.equals(other.timeInstant))
 			return false;
-		
+
 		if (attachment == null) {
 			if (other.attachment != null)
 				return false;
