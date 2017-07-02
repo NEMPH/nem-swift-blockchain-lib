@@ -21,7 +21,7 @@ public class TransactionBlock implements Serializable {
 	private Account recipient;
 
 	/** The amount. */
-	private Long amount;
+	private Long amount= 0l;
 
 	/** The attachment. */
 	private TransferTransactionAttachment attachment;

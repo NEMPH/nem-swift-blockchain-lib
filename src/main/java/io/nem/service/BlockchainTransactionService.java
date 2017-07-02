@@ -18,6 +18,8 @@ import org.nem.core.serialization.BinarySerializer;
 import org.nem.core.serialization.Deserializer;
 import org.nem.core.time.TimeInstant;
 
+import io.nem.util.AppPropertiesUtil;
+
 /**
  * The Class TransactionService.
  */
@@ -27,7 +29,7 @@ public class BlockchainTransactionService {
 	private static final Logger LOGGER = Logger.getLogger(BlockchainTransactionService.class.getName());
 	
 	static {
-		NetworkInfos.setDefault(NetworkInfos.fromFriendlyName("testnet"));
+		NetworkInfos.setDefault(NetworkInfos.fromFriendlyName(AppPropertiesUtil.getProperty("node.endpoint.networkname")));
 	}
 
 	/**
@@ -100,6 +102,7 @@ public class BlockchainTransactionService {
 			
 			return null;
 		}).join();
+		
 	}
 	
 
@@ -122,7 +125,7 @@ public class BlockchainTransactionService {
 				Amount.fromMicroNem(amount), // amount in micro xem
 				attachment); // attachment (message, mosaics)
 		
-		transaction.setFee(Amount.fromNem(1));
+		transaction.setFee(Amount.fromNem(0));
 		transaction.setDeadline(timeInstant.addHours(23));
 		transaction.sign();
 		

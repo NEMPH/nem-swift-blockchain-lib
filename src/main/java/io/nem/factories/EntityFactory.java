@@ -16,8 +16,9 @@ public class EntityFactory {
 	 * @param address the address
 	 * @return the account
 	 */
-	public static Account createAccount(Address address) {
+	public static Account buildAccount(Address address) {
 		return new Account(address);
+		
 	}
 	
 	/**
@@ -26,7 +27,7 @@ public class EntityFactory {
 	 * @param keyPair the key pair
 	 * @return the account
 	 */
-	public static Account createAccount(KeyPair keyPair) {
+	public static Account buildAccount(KeyPair keyPair) {
 		return new Account(keyPair);
 	}
 	
@@ -36,7 +37,7 @@ public class EntityFactory {
 	 * @param hex the hex
 	 * @return the account
 	 */
-	public static Account createAccount(String hex) {
-		return new Account(new KeyPair(PrivateKey.fromHexString(hex)));
+	public static Account buildAccount(String privateKeyHex) {
+		return new Account(new KeyPair(PrivateKey.fromHexString(privateKeyHex)));
 	}
 }

@@ -68,11 +68,6 @@ public class SwiftBlockchainTransactionBuilder {
 		return this;
 	}
 
-	public SwiftBlockchainTransactionBuilder setTransactionMessageType(TransactionMessageType transactionMessageType) {
-		this.tBlock.setTransactionMessageType(transactionMessageType);
-		return this;
-	}
-
 	/**
 	 * Sets the attachment.
 	 *
@@ -110,6 +105,7 @@ public class SwiftBlockchainTransactionBuilder {
 			BlockchainTransactionService.createAndSendTransaction(this.tBlock.getSender(), this.tBlock.getRecipient(),
 					this.tBlock.getAmount());
 		} else {
+			
 			BlockchainTransactionService.createAndSendTransaction(this.tBlock.getSender(), this.tBlock.getRecipient(),
 					this.tBlock.getAmount(), this.tBlock.getAttachment());
 		}
