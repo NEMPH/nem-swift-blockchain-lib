@@ -141,7 +141,6 @@ public class BuildTransactionTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Test
@@ -163,7 +162,6 @@ public class BuildTransactionTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
