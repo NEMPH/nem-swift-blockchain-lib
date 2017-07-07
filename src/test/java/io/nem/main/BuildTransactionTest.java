@@ -5,7 +5,10 @@ import org.nem.core.messages.SecureMessage;
 import org.nem.core.model.Account;
 import org.nem.core.model.HashMetaData;
 import org.nem.core.model.HashMetaDataPair;
+import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.model.observers.TransactionHashesNotification;
+import org.nem.core.model.primitive.Quantity;
+import org.nem.core.test.Utils;
 
 import com.prowidesoftware.swift.io.ConversionService;
 
@@ -107,6 +110,33 @@ public class BuildTransactionTest {
 
 			SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount)
 					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
+					.buildAndSendTransaction(); // build and send it!
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Test
+	public void testCbBuildAndSendSwiftTransactionWithMosaic() {
+
+		// Build a transaction and send it.
+		try {
+
+			// test from a string.
+			final Account senderAccount = EntityFactory
+					.buildAccount("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+			final Account recipientAccount = EntityFactory
+					.buildAccount("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
+
+			final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
+					new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
+			
+			TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
+			attachment.addMosaic(Utils.createMosaic(1).getMosaicId(), new Quantity(12));
+			
+			SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount)
+					.setAttachment(attachment)
 					.buildAndSendTransaction(); // build and send it!
 		} catch (Exception e) {
 			e.printStackTrace();
