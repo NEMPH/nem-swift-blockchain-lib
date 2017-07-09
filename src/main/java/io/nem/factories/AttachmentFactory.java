@@ -2,6 +2,7 @@ package io.nem.factories;
 import org.nem.core.model.Message;
 import org.nem.core.model.TransferTransactionAttachment;
 
+// TODO: Auto-generated Javadoc
 /**
  * A factory for creating Attachment objects.
  */
