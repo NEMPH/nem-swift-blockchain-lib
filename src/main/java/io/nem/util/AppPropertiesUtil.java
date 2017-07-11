@@ -3,8 +3,12 @@ package io.nem.util;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * The Class AppPropertiesUtil.
+ */
 public class AppPropertiesUtil {
 	
+	/** The properties. */
 	static Properties properties = new Properties();
 	static {
 		try {
@@ -14,6 +18,12 @@ public class AppPropertiesUtil {
 		}
 	}
 	
+	/**
+	 * Gets the property.
+	 *
+	 * @param key the key
+	 * @return the property
+	 */
 	public static String getProperty(String key) {
 		return properties.getProperty(key);
 	}

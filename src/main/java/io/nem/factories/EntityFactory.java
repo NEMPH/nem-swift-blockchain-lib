@@ -5,6 +5,7 @@ import org.nem.core.crypto.PrivateKey;
 import org.nem.core.model.Account;
 import org.nem.core.model.Address;
 
+// TODO: Auto-generated Javadoc
 /**
  * A factory for creating Entity objects.
  */
@@ -34,7 +35,7 @@ public class EntityFactory {
 	/**
 	 * Creates a new Entity object.
 	 *
-	 * @param hex the hex
+	 * @param privateKeyHex the private key hex
 	 * @return the account
 	 */
 	public static Account buildAccount(String privateKeyHex) {

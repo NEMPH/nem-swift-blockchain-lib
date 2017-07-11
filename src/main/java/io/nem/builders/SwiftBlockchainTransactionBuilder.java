@@ -4,7 +4,6 @@ import org.nem.core.model.Account;
 import org.nem.core.model.Transaction;
 import org.nem.core.model.TransferTransactionAttachment;
 import io.nem.model.TransactionBlock;
-import io.nem.model.TransactionMessageType;
 import io.nem.service.Globals;
 import io.nem.service.BlockchainTransactionService;
 

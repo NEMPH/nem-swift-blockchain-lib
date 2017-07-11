@@ -2,13 +2,8 @@ package io.nem.main;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.junit.Test;
-import org.nem.core.messages.SecureMessage;
-import org.nem.core.model.Account;
-
 import com.prowidesoftware.swift.model.mt.AbstractMT;
-import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103_STP;
 
 /**
@@ -16,6 +11,7 @@ import com.prowidesoftware.swift.model.mt.mt1xx.MT103_STP;
  */
 public class SwiftParserTest {
 
+	/** The sample swift msg. */
 	private String sampleSwiftMsg = "";
 
 	/**

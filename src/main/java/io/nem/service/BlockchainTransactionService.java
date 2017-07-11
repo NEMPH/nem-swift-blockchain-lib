@@ -20,7 +20,6 @@ import org.nem.core.time.TimeInstant;
 
 import io.nem.util.AppPropertiesUtil;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TransactionService.
  */
@@ -97,7 +96,7 @@ public class BlockchainTransactionService {
 						sender.getAddress(), recipient.getAddress(), result.getMessage()));
 			}
 		}).exceptionally(e -> {
-			
+			e.printStackTrace();
 			LOGGER.warning(String.format("could not send %s from %s to %s, reason: %s", attachment.getMessage(),
 					sender.getAddress(), recipient.getAddress().getEncoded(), e.getMessage()));
 			

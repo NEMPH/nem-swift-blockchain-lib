@@ -6,6 +6,7 @@ import org.nem.core.model.Account;
 import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.time.TimeInstant;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class TransactionBlock.
  */
@@ -26,8 +27,10 @@ public class TransactionBlock implements Serializable {
 	/** The attachment. */
 	private TransferTransactionAttachment attachment;
 
+	/** The payload. */
 	private String payload;
 	
+	/** The transaction message type. */
 	private TransactionMessageType transactionMessageType;
 
 	/** The time instant. */
@@ -118,10 +121,20 @@ public class TransactionBlock implements Serializable {
 		return timeInstant;
 	}
 
+	/**
+	 * Gets the payload.
+	 *
+	 * @return the payload
+	 */
 	public String getPayload() {
 		return payload;
 	}
 
+	/**
+	 * Sets the payload.
+	 *
+	 * @param payload the new payload
+	 */
 	public void setPayload(String payload) {
 		this.payload = payload;
 	}
@@ -136,10 +149,20 @@ public class TransactionBlock implements Serializable {
 		this.timeInstant = timeInstant;
 	}
 
+	/**
+	 * Gets the transaction message type.
+	 *
+	 * @return the transaction message type
+	 */
 	public TransactionMessageType getTransactionMessageType() {
 		return transactionMessageType;
 	}
 
+	/**
+	 * Sets the transaction message type.
+	 *
+	 * @param transactionMessageType the new transaction message type
+	 */
 	public void setTransactionMessageType(TransactionMessageType transactionMessageType) {
 		this.transactionMessageType = transactionMessageType;
 	}

@@ -6,7 +6,6 @@ import org.nem.core.connect.client.DefaultAsyncNemConnector;
 import org.nem.core.model.Account;
 import org.nem.core.node.ApiId;
 
-// TODO: Auto-generated Javadoc
 /**
  * A factory for creating Connector objects.
  */

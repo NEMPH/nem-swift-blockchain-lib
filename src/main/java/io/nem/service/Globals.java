@@ -9,6 +9,7 @@ import org.nem.core.time.TimeProvider;
 import io.nem.factories.ConnectorFactory;
 import io.nem.util.AppPropertiesUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Globals.
  */
@@ -17,6 +18,7 @@ public class Globals {
 	/** The Constant TIME_PROVIDER. */
 	public static final TimeProvider TIME_PROVIDER = new SystemTimeProvider();
 	
+	/** The Constant NODE_ENDPOINT. */
 	public static final NodeEndpoint NODE_ENDPOINT = new NodeEndpoint(
 			AppPropertiesUtil.getProperty("node.endpoint.protocol"),
 			AppPropertiesUtil.getProperty("node.endpoint.uri"), 
