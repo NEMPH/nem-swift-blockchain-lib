@@ -6,7 +6,7 @@ import org.nem.core.model.Account;
 import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.time.TimeInstant;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TransactionBlock.
  */
