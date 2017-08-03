@@ -24,10 +24,12 @@ The library uses the Builder Pattern to create and send transactions.
 	
 	//	prepare the payload message.
 	final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
-			new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
+			GzipUtil.compress(new ConversionService().getXml(this.sampleSwiftMsg, true)));
 
 	// use the builder to build and send the transaction.
-	SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount)
+	SwiftBlockchainTransactionBuilder.getInstance()
+			.setSender(senderAccount)
+			.setRecipient(recipientAccount)
 			.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
 			.buildAndSendTransaction(); // build and send it!
 
