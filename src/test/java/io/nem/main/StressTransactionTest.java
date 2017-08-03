@@ -17,7 +17,6 @@ import io.nem.factories.AttachmentFactory;
 import io.nem.factories.EntityFactory;
 import io.nem.model.TransactionMessageType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BuildTransactionTest.
  */
