@@ -1,14 +1,20 @@
 package io.nem.main;
 
+import java.io.IOException;
+
 import org.junit.Test;
+import org.nem.core.crypto.PublicKey;
+import org.nem.core.messages.PlainMessage;
 import org.nem.core.messages.SecureMessage;
 import org.nem.core.model.Account;
+import org.nem.core.model.Address;
 import org.nem.core.model.HashMetaData;
 import org.nem.core.model.HashMetaDataPair;
 import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.model.observers.TransactionHashesNotification;
 import org.nem.core.model.primitive.Quantity;
 import org.nem.core.test.Utils;
+import org.nem.core.utils.Base32Encoder;
 
 import com.prowidesoftware.swift.io.ConversionService;
 
@@ -16,6 +22,7 @@ import io.nem.builders.SwiftBlockchainTransactionBuilder;
 import io.nem.factories.AttachmentFactory;
 import io.nem.factories.EntityFactory;
 import io.nem.model.TransactionMessageType;
+import io.nem.util.GzipUtils;
 
 /**
  * The Class BuildTransactionTest.
@@ -135,12 +142,14 @@ public class BuildTransactionTest {
 
 		// Build a transaction and send it.
 		try {
-
+			
 			// test from a string.
 			final Account senderAccount = EntityFactory
 					.buildAccount("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
 			final Account recipientAccount = EntityFactory
 					.buildAccount("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
+			
+			
 
 			final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
 					new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
@@ -164,12 +173,18 @@ public class BuildTransactionTest {
 
 		// test from a string.
 		final Account senderAccount = EntityFactory
-				.buildAccount("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+				.buildAccount(Address.fromEncoded(Base32Encoder.getString("MDVJCH-6F5FXV-UOFCC3-PZTSXP-QNPCUL-YQMWEG-AOOW".getBytes())));
 		final Account recipientAccount = EntityFactory
-				.buildAccount("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
-
-		final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
-				sampleSwiftMsg.getBytes());
+				.buildAccount(Address.fromEncoded(Base32Encoder.getString("MDYSYW-VWGC6J-DD7BGE-4JBZMU-EM5KXD-Z7J77U-4X2Y".getBytes())));
+		
+		PlainMessage message = null;
+		try {
+			message = new PlainMessage(
+					GzipUtils.compress(sampleSwiftMsg));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		// Build a transaction and send it.
 		try {
 			SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount)
