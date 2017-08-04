@@ -9,7 +9,8 @@ Java library to convert and send Swift Messages to NEM Blockchain and vice versa
 Set up your Node first via app.properties.
 
 The library uses the Builder Pattern to create and send transactions.
-	
+
+```java
 	//	 swift message
 	final String sampleSwiftMsg = "{1:F21FOOLHKH0AXXX0304009999}{4:{177:1608140809}{451:0}}{1:F01FOOLHKH0AXXX0304009999}{2:O9401609160814FOOLHKH0AXXX03040027341608141609N}{4:\n"
 			+ ":20:USD940NO1\n" + ":21:123456/DEV\n" + ":25:USD234567\n" + ":28C:1/1\n" + ":60F:C160418USD672,\n"
@@ -24,13 +25,15 @@ The library uses the Builder Pattern to create and send transactions.
 	
 	//	prepare the payload message.
 	final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
-			new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
+			GzipUtil.compress(new ConversionService().getXml(this.sampleSwiftMsg, true)));
 
 	// use the builder to build and send the transaction.
-	SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount)
+	SwiftBlockchainTransactionBuilder.getInstance()
+			.setSender(senderAccount)
+			.setRecipient(recipientAccount)
 			.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
 			.buildAndSendTransaction(); // build and send it!
-
+```
 
 <h3>Testing</h3>
 
