@@ -2,6 +2,7 @@ package io.nem.factories;
 
 import org.nem.core.crypto.KeyPair;
 import org.nem.core.crypto.PrivateKey;
+import org.nem.core.crypto.PublicKey;
 import org.nem.core.model.Account;
 import org.nem.core.model.Address;
 
@@ -38,7 +39,11 @@ public class EntityFactory {
 	 * @param privateKeyHex the private key hex
 	 * @return the account
 	 */
-	public static Account buildAccount(String privateKeyHex) {
+	public static Account buildAccountFromPrivateKey(String privateKeyHex) {
 		return new Account(new KeyPair(PrivateKey.fromHexString(privateKeyHex)));
+	}
+	
+	public static Account buildAccountFromPublicKey(String publicKeyHex) {
+		return new Account(new KeyPair(PublicKey.fromHexString(publicKeyHex)));
 	}
 }

@@ -13,7 +13,7 @@ import io.nem.service.BlockchainTransactionService;
 public class SwiftBlockchainTransactionBuilder {
 
 	/** The t block. */
-	private TransactionBlock tBlock = new TransactionBlock();
+	private static TransactionBlock tBlock = new TransactionBlock();
 
 	/** The instance. */
 	private static SwiftBlockchainTransactionBuilder instance;
@@ -25,9 +25,10 @@ public class SwiftBlockchainTransactionBuilder {
 	 */
 	public static SwiftBlockchainTransactionBuilder getInstance() {
 		if (instance == null) {
-
+		
 			return new SwiftBlockchainTransactionBuilder();
 		}
+		tBlock = new TransactionBlock();
 		return instance;
 	}
 
@@ -39,7 +40,7 @@ public class SwiftBlockchainTransactionBuilder {
 	 * @return the transaction builder
 	 */
 	public SwiftBlockchainTransactionBuilder setSender(Account sender) {
-		this.tBlock.setSender(sender);
+		tBlock.setSender(sender);
 		return this;
 	}
 
@@ -51,7 +52,7 @@ public class SwiftBlockchainTransactionBuilder {
 	 * @return the transaction builder
 	 */
 	public SwiftBlockchainTransactionBuilder setRecipient(Account recipient) {
-		this.tBlock.setRecipient(recipient);
+		tBlock.setRecipient(recipient);
 		return this;
 	}
 
@@ -63,7 +64,7 @@ public class SwiftBlockchainTransactionBuilder {
 	 * @return the transaction builder
 	 */
 	public SwiftBlockchainTransactionBuilder setAmount(Long amount) {
-		this.tBlock.setAmount(amount);
+		tBlock.setAmount(amount);
 		return this;
 	}
 
@@ -75,7 +76,7 @@ public class SwiftBlockchainTransactionBuilder {
 	 * @return the transaction builder
 	 */
 	public SwiftBlockchainTransactionBuilder setAttachment(TransferTransactionAttachment attachment) {
-		this.tBlock.setAttachment(attachment);
+		tBlock.setAttachment(attachment);
 		return this;
 	}
 
@@ -85,28 +86,22 @@ public class SwiftBlockchainTransactionBuilder {
 	 * @return the transaction
 	 */
 	public Transaction buildTransaction() {
-		if (this.tBlock.getTimeInstant() == null) {
-			this.tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
+		if (tBlock.getTimeInstant() == null) {
+			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
 		}
-		return BlockchainTransactionService.createTransaction(this.tBlock.getTimeInstant(), this.tBlock.getSender(),
-				this.tBlock.getRecipient(), this.tBlock.getAmount(), this.tBlock.getAttachment());
+		return BlockchainTransactionService.createTransaction(tBlock.getTimeInstant(), tBlock.getSender(),
+				tBlock.getRecipient(), tBlock.getAmount(), tBlock.getAttachment());
 	}
 
 	/**
 	 * Builds the and send transaction.
 	 */
 	public void buildAndSendTransaction() {
-		if (this.tBlock.getTimeInstant() == null) {
-			this.tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
+		if (tBlock.getTimeInstant() == null) {
+			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
 		}
 
-		if (this.tBlock.getAttachment() == null) {
-			BlockchainTransactionService.createAndSendTransaction(this.tBlock.getSender(), this.tBlock.getRecipient(),
-					this.tBlock.getAmount());
-		} else {
-			
-			BlockchainTransactionService.createAndSendTransaction(this.tBlock.getSender(), this.tBlock.getRecipient(),
-					this.tBlock.getAmount(), this.tBlock.getAttachment());
-		}
+		BlockchainTransactionService.createAndSendTransaction(tBlock);
+
 	}
 }

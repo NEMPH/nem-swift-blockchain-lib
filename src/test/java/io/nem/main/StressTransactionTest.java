@@ -37,9 +37,9 @@ public class StressTransactionTest {
 		// Build a transaction.
 		SwiftBlockchainTransactionBuilder.getInstance()
 				.setRecipient(
-						EntityFactory.buildAccount("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec"))
+						EntityFactory.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec"))
 				.setSender(
-						EntityFactory.buildAccount("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1"))
+						EntityFactory.buildAccountFromPublicKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1"))
 				.buildTransaction(); // build only.
 	}
 	
@@ -52,10 +52,9 @@ public class StressTransactionTest {
 		try {
 			for (int i = 0; i < 500; i++) {
 				// test from a string.
-				final Account senderAccount = EntityFactory
-						.buildAccount("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+				final Account senderAccount = EntityFactory.buildAccountFromPrivateKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
 				final Account recipientAccount = EntityFactory
-						.buildAccount("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
+						.buildAccountFromPublicKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
 
 				final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
 						new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
@@ -82,10 +81,9 @@ public class StressTransactionTest {
 		try {
 			for (int i = 0; i < 500; i++) {
 				// test from a string.
-				final Account senderAccount = EntityFactory
-						.buildAccount("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+				final Account senderAccount = EntityFactory.buildAccountFromPrivateKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
 				final Account recipientAccount = EntityFactory
-						.buildAccount("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
+						.buildAccountFromPublicKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
 
 				final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
 						new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());

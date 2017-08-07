@@ -14,10 +14,12 @@ import org.nem.core.model.ncc.NemAnnounceResult;
 import org.nem.core.model.ncc.RequestAnnounce;
 import org.nem.core.model.primitive.Amount;
 import org.nem.core.node.NodeEndpoint;
+import org.nem.core.serialization.BinaryDeserializer;
 import org.nem.core.serialization.BinarySerializer;
 import org.nem.core.serialization.Deserializer;
 import org.nem.core.time.TimeInstant;
 
+import io.nem.model.TransactionBlock;
 import io.nem.util.AppPropertiesUtil;
 
 /**
@@ -64,6 +66,34 @@ public class BlockchainTransactionService {
 			return null;
 		}).join();
 	}
+	public static void createAndSendTransaction(final TransactionBlock tBlock) {
+
+		final Transaction transaction = createTransaction(tBlock.getTimeInstant(), tBlock.getSender(), tBlock.getRecipient(),
+				tBlock.getAmount(), tBlock.getAttachment());
+		final byte[] data = BinarySerializer.serializeToBytes(transaction.asNonVerifiable());
+
+		final RequestAnnounce request = new RequestAnnounce(data, transaction.getSignature().getBytes());
+		final CompletableFuture<Deserializer> future = send(Globals.NODE_ENDPOINT, request);
+//		future.thenAccept(d -> {
+//			final NemAnnounceResult result = new NemAnnounceResult(d);
+//		
+//			switch (result.getCode()) {
+//			case 1:
+//				LOGGER.info(String.format("successfully send %d micro xem from %s to %s", tBlock.getAmount(), tBlock.getSender().getAddress(),
+//						tBlock.getRecipient().getAddress()));
+//				break;
+//			default:
+//				LOGGER.warning(String.format("could not send xem from %s to %s, reason: %s", tBlock.getSender().getAddress(),
+//						tBlock.getRecipient().getAddress(), result.getMessage()));
+//			}
+//		}).exceptionally(e -> {
+//			
+//			LOGGER.warning(String.format("could not send xem from %s to %s, reason: %s", tBlock.getSender().getAddress(),
+//					tBlock.getRecipient().getAddress().getEncoded(), e.getMessage()));
+//
+//			return null;
+//		}).join();
+	}
 	
 
 	/**
@@ -82,7 +112,7 @@ public class BlockchainTransactionService {
 		
 		final byte[] data = BinarySerializer.serializeToBytes(transaction.asNonVerifiable());
 		final RequestAnnounce request = new RequestAnnounce(data, transaction.getSignature().getBytes());
-
+		
 		final CompletableFuture<Deserializer> future = send(Globals.NODE_ENDPOINT, request);
 		future.thenAccept(d -> {
 			final NemAnnounceResult result = new NemAnnounceResult(d);
