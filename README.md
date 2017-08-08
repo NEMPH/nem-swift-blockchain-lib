@@ -19,12 +19,6 @@ node.endpoint.networkname=mijinnet
 node.endpoint.protocol=http
 node.endpoint.uri=a1.nem.foundation
 node.endpoint.port=7895
-
-bank.endpoint.protocol=http
-bank.endpoint.uri=localhost
-bank.endpoint.port=80
-bank.endpoint.method=post
-
 ```
 
 <h4>Encode and Gzip Swift File/Text</h4>
