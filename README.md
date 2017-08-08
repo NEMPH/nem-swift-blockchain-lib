@@ -10,6 +10,23 @@ Set up your Node first via app.properties.
 
 The library uses the Builder Pattern to create and send transactions.
 
+<h4>Set up your node connection</h4>
+Create a app.properties file on your classpath and add the following:
+
+```properties
+
+node.endpoint.networkname=mijinnet
+node.endpoint.protocol=http
+node.endpoint.uri=a1.nem.foundation
+node.endpoint.port=7895
+
+bank.endpoint.protocol=http
+bank.endpoint.uri=localhost
+bank.endpoint.port=80
+bank.endpoint.method=post
+
+```
+
 <h4>Encode and Gzip Swift File/Text</h4>
 
 ```java
