@@ -24,6 +24,7 @@ import io.nem.builders.SwiftBlockchainTransactionBuilder;
 import io.nem.factories.AttachmentFactory;
 import io.nem.factories.EntityFactory;
 import io.nem.model.TransactionMessageType;
+import io.nem.swift.crypto.SecureMessageSwiftPayloadEncoder;
 import io.nem.util.GzipUtils;
 
 /**
@@ -138,9 +139,7 @@ public class EncodeBuildTransactionTest {
 			final Account recipientAccount = EntityFactory
 					.buildAccountFromPublicKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
 
-			final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
-					new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
-
+			SecureMessage message = SecureMessageSwiftPayloadEncoder.encodeAndGzipCompress(senderAccount, recipientAccount, sampleSwiftMsg);
 			TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
 			attachment.addMosaic(Utils.createMosaic(1).getMosaicId(), new Quantity(12));
 

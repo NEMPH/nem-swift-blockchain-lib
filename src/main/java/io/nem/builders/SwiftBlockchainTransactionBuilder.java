@@ -100,7 +100,7 @@ public class SwiftBlockchainTransactionBuilder {
 		if (tBlock.getTimeInstant() == null) {
 			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
 		}
-
+		
 		BlockchainTransactionService.createAndSendTransaction(tBlock);
 
 	}
