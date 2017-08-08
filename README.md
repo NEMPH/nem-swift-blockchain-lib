@@ -3,7 +3,9 @@
 # Swift / Blockchain Library for NEM.io Platform
 
 Java library to convert and send Swift Messages to NEM Blockchain and vice versa
-
+<center>
+<img src="http://arcabots.com/swift_bc_nem.png"></img>
+</center>
 <h3>Usage</h3>
 
 Set up your Node first via app.properties.
