@@ -20,6 +20,16 @@ public class TransactionBlock implements Serializable {
 
 	/** The recipient. */
 	private Account recipient;
+	
+	public Account getMulitSig() {
+		return mulitSig;
+	}
+
+	public void setMulitSig(Account mulitSig) {
+		this.mulitSig = mulitSig;
+	}
+
+	private Account mulitSig;
 
 	/** The amount. */
 	private Long amount= 0l;

@@ -2,6 +2,7 @@ package io.nem.builders;
 
 import org.nem.core.model.Account;
 import org.nem.core.model.Transaction;
+import org.nem.core.model.TransferTransaction;
 import org.nem.core.model.TransferTransactionAttachment;
 import io.nem.model.TransactionBlock;
 import io.nem.service.Globals;
@@ -25,7 +26,7 @@ public class SwiftBlockchainTransactionBuilder {
 	 */
 	public static SwiftBlockchainTransactionBuilder getInstance() {
 		if (instance == null) {
-		
+
 			return new SwiftBlockchainTransactionBuilder();
 		}
 		tBlock = new TransactionBlock();
@@ -41,6 +42,11 @@ public class SwiftBlockchainTransactionBuilder {
 	 */
 	public SwiftBlockchainTransactionBuilder setSender(Account sender) {
 		tBlock.setSender(sender);
+		return this;
+	}
+
+	public SwiftBlockchainTransactionBuilder setMultisig(Account multiSig) {
+		tBlock.setMulitSig(multiSig);
 		return this;
 	}
 
@@ -93,6 +99,18 @@ public class SwiftBlockchainTransactionBuilder {
 				tBlock.getRecipient(), tBlock.getAmount(), tBlock.getAttachment());
 	}
 
+	public Transaction buildMultisigTransaction() {
+		if (tBlock.getTimeInstant() == null) {
+			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
+		}
+		
+		Transaction transaction = BlockchainTransactionService.createTransaction(tBlock.getTimeInstant(),
+				tBlock.getSender(), tBlock.getRecipient(), tBlock.getAmount(), tBlock.getAttachment());
+
+		return BlockchainTransactionService.createMultisigTransaction(tBlock.getTimeInstant(), tBlock.getSender(),
+				tBlock.getMulitSig(), tBlock.getAmount(), transaction);
+	}
+
 	/**
 	 * Builds the and send transaction.
 	 */
@@ -100,8 +118,17 @@ public class SwiftBlockchainTransactionBuilder {
 		if (tBlock.getTimeInstant() == null) {
 			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
 		}
-		
+
 		BlockchainTransactionService.createAndSendTransaction(tBlock);
+
+	}
+
+	public void buildAndSendMultisigTransaction() {
+		if (tBlock.getTimeInstant() == null) {
+			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
+		}
+
+		BlockchainTransactionService.createAndSendMultisigTransaction(tBlock);
 
 	}
 }
