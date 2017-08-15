@@ -9,7 +9,7 @@ import com.prowidesoftware.swift.model.field.Field77E;
 import com.prowidesoftware.swift.model.mt.mt7xx.MT700;
 import com.prowidesoftware.swift.model.mt.mt7xx.MT798;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Example of message creation using a specific MTnnn class and appenders
  * to create a free format message. 

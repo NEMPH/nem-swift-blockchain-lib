@@ -9,7 +9,7 @@ import org.nem.core.time.TimeProvider;
 import io.nem.factories.ConnectorFactory;
 import io.nem.util.AppPropertiesUtil;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Globals.
  */

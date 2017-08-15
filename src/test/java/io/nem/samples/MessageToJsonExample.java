@@ -6,7 +6,7 @@ import java.io.IOException;
 import com.prowidesoftware.swift.io.parser.SwiftParser;
 import com.prowidesoftware.swift.model.SwiftMessage;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Example of message conversion to JSON representation.
  * 

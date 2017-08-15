@@ -7,7 +7,7 @@ import java.io.IOException;
 import com.prowidesoftware.swift.model.mt.AbstractMT;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * This example shows how to read a SWIFT MT message from a file, in the context where
  * the message type to parse is unknown.

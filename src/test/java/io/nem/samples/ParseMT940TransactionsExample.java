@@ -8,7 +8,7 @@ import com.prowidesoftware.swift.model.Tag;
 import com.prowidesoftware.swift.model.field.Field61;
 import com.prowidesoftware.swift.model.mt.mt9xx.MT940;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * This example shows how to link the non-sequence loop conformed by fields 61 and 86
  * in and MT940 statement, printing information of the transaction information in

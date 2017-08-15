@@ -3,7 +3,7 @@ package io.nem.samples;
 
 import com.prowidesoftware.swift.io.ConversionService;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Example of message conversion to XML representation.
  * Notice this is not SWIFT MX format, but the internal/proprietary XML representation defined at WIFE.

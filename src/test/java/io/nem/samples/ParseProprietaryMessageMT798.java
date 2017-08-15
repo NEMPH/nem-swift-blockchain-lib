@@ -9,7 +9,7 @@ import com.prowidesoftware.swift.model.field.Field20;
 import com.prowidesoftware.swift.model.field.Field21A;
 import com.prowidesoftware.swift.model.mt.mt7xx.MT798;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * This example shows how to read a proprietary SWIFT MT message from a String.
  * In the example we use an MT 798 with an inner MT 700.

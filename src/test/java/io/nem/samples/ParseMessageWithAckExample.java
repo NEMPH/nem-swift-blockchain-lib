@@ -9,7 +9,7 @@ import com.prowidesoftware.swift.io.parser.SwiftParser;
 import com.prowidesoftware.swift.model.SwiftMessage;
 import com.prowidesoftware.swift.model.mt.mt9xx.MT940;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * There is a frequent misunderstanding of the FIN messages format when the actual message
  * is preceded by a system ACK, and the expected behavior of Prowide Core parser when reading

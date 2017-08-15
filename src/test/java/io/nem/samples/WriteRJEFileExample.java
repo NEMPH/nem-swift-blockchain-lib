@@ -6,7 +6,7 @@ import com.prowidesoftware.swift.model.field.Field20;
 import com.prowidesoftware.swift.model.field.Field23B;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Example to create some messages and serialize them into an RJE file.
  * <br />
