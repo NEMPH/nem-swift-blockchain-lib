@@ -64,16 +64,33 @@ String decodedPayload = SecureMessageSwiftPayloadDecoder.decodeAndGzipUncompress
 	
 ```
 
+<h4>Monitoring Incoming/Outgoing Transactions</h4>
+
+Documentation to follow.
+
 <h3>Testing</h3>
 
 Run the JUnit Test cases using Maven or use it as a reference.
 
-mvn test
+	mvn test
+
+To test the funtionality with real data, set the sender, recipient and multisig via the super class TransactionUnitTest class.
+
+```java
+
+@Before
+public void init() {
+    this.setAccountMultisigAccountPublicKey(...);
+    this.setAccountSenderPrivateKey(...);
+    this.setAccountRecipientPublicKey(...);
+}
+
+```
 
 <h3>Build</h3>
 
 Like any other maven project, just do the maven command below.
 
-mvn clean install
+	mvn clean install
 
 <sub>Copyright (c) 2017</sub>

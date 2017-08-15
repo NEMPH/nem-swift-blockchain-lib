@@ -48,4 +48,13 @@ public class EntityFactory {
 	public static Account buildAccountFromPublicKey(String publicKeyHex) {
 		return new Account(new KeyPair(PublicKey.fromHexString(publicKeyHex)));
 	}
+
+	public static KeyPair buildKeyPairFromPublicKey(String publicKeyHex) {
+		return new KeyPair(PublicKey.fromHexString(publicKeyHex));
+	}
+
+	public static KeyPair buildKeyPairFromPrivateKey(String publicKeyHex) {
+		return new KeyPair(PrivateKey.fromHexString(publicKeyHex));
+	}
+
 }

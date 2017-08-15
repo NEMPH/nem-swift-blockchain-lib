@@ -11,8 +11,19 @@ import org.nem.core.utils.HexEncoder;
 
 import io.nem.util.GzipUtils;
 
+/**
+ * The Class SecureMessageSwiftPayloadDecoder.
+ */
 public class SecureMessageSwiftPayloadDecoder {
 
+	/**
+	 * Decode.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the secure message
+	 */
 	public static SecureMessage decode(String senderPublicKey, String recipientPrivateKey, String encryptedPayload) {
 		final KeyPair senderKeyPair = new KeyPair(PublicKey.fromHexString(senderPublicKey));
 		final KeyPair recipientKeyPairPriv = new KeyPair(PrivateKey.fromHexString(recipientPrivateKey));
@@ -20,6 +31,14 @@ public class SecureMessageSwiftPayloadDecoder {
 				HexEncoder.getBytes(encryptedPayload));
 	}
 
+	/**
+	 * Decode.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the secure message
+	 */
 	public static SecureMessage decode(String senderPublicKey, String recipientPrivateKey, byte[] encryptedPayload) {
 		final KeyPair senderKeyPair = new KeyPair(PublicKey.fromHexString(senderPublicKey));
 		final KeyPair recipientKeyPairPriv = new KeyPair(PrivateKey.fromHexString(recipientPrivateKey));
@@ -27,6 +46,15 @@ public class SecureMessageSwiftPayloadDecoder {
 				HexEncoder.getString(encryptedPayload).getBytes());
 	}
 
+	/**
+	 * Decode and gzip uncompress.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String decodeAndGzipUncompress(String senderPublicKey, String recipientPrivateKey,
 			String encryptedPayload) throws IOException {
 		final KeyPair senderKeyPair = new KeyPair(PublicKey.fromHexString(senderPublicKey));
@@ -37,6 +65,15 @@ public class SecureMessageSwiftPayloadDecoder {
 		return GzipUtils.decompress(secureMessage.getDecodedPayload());
 	}
 
+	/**
+	 * Decode and gzip uncompress.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String decodeAndGzipUncompress(String senderPublicKey, String recipientPrivateKey,
 			byte[] encryptedPayload) throws IOException {
 		final KeyPair senderKeyPair = new KeyPair(PublicKey.fromHexString(senderPublicKey));
@@ -47,6 +84,15 @@ public class SecureMessageSwiftPayloadDecoder {
 		return GzipUtils.decompress(secureMessage.getDecodedPayload());
 	}
 
+	/**
+	 * Decode and gzip uncompress.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String decodeAndGzipUncompress(KeyPair senderPublicKey, KeyPair recipientPrivateKey,
 			String encryptedPayload) throws IOException {
 		SecureMessage secureMessage = SecureMessage.fromEncodedPayload(new Account(senderPublicKey),
@@ -54,6 +100,15 @@ public class SecureMessageSwiftPayloadDecoder {
 		return GzipUtils.decompress(secureMessage.getDecodedPayload());
 	}
 
+	/**
+	 * Decode and gzip uncompress.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String decodeAndGzipUncompress(KeyPair senderPublicKey, KeyPair recipientPrivateKey,
 			byte[] encryptedPayload) throws IOException {
 		SecureMessage secureMessage = SecureMessage.fromEncodedPayload(new Account(senderPublicKey),
@@ -61,6 +116,15 @@ public class SecureMessageSwiftPayloadDecoder {
 		return GzipUtils.decompress(secureMessage.getDecodedPayload());
 	}
 
+	/**
+	 * Decode and gzip uncompress.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String decodeAndGzipUncompress(Account senderPublicKey, Account recipientPrivateKey,
 			String encryptedPayload) throws IOException {
 		SecureMessage secureMessage = SecureMessage.fromEncodedPayload(senderPublicKey, recipientPrivateKey,
@@ -68,6 +132,15 @@ public class SecureMessageSwiftPayloadDecoder {
 		return GzipUtils.decompress(secureMessage.getDecodedPayload());
 	}
 
+	/**
+	 * Decode and gzip uncompress.
+	 *
+	 * @param senderPublicKey the sender public key
+	 * @param recipientPrivateKey the recipient private key
+	 * @param encryptedPayload the encrypted payload
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static String decodeAndGzipUncompress(Account senderPublicKey, Account recipientPrivateKey,
 			byte[] encryptedPayload) throws IOException {
 		SecureMessage secureMessage = SecureMessage.fromEncodedPayload(senderPublicKey, recipientPrivateKey,

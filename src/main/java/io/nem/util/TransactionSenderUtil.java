@@ -21,7 +21,6 @@ public class TransactionSenderUtil {
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(TransactionSenderUtil.class.getName());
 
-
 	public static void sendTransaction(Transaction transaction) {
 		
 		final byte[] data = BinarySerializer.serializeToBytes(transaction.asNonVerifiable());

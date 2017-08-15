@@ -3,24 +3,17 @@ package io.nem.main;
 import org.junit.Test;
 import org.nem.core.messages.SecureMessage;
 import org.nem.core.model.Account;
-import org.nem.core.model.HashMetaData;
-import org.nem.core.model.HashMetaDataPair;
 import org.nem.core.model.TransferTransactionAttachment;
-import org.nem.core.model.observers.TransactionHashesNotification;
 import org.nem.core.model.primitive.Quantity;
 import org.nem.core.test.Utils;
-
 import com.prowidesoftware.swift.io.ConversionService;
-
 import io.nem.builders.SwiftBlockchainTransactionBuilder;
-import io.nem.factories.AttachmentFactory;
 import io.nem.factories.EntityFactory;
-import io.nem.model.TransactionMessageType;
 
 /**
  * The Class BuildTransactionTest.
  */
-public class StressTransactionTest {
+public class StressTransactionTest extends TransactionUnitTest {
 
 	/** The sample swift msg. */
 	final String sampleSwiftMsg = "{1:F21FOOLHKH0AXXX0304009999}{4:{177:1608140809}{451:0}}{1:F01FOOLHKH0AXXX0304009999}{2:O9401609160814FOOLHKH0AXXX03040027341608141609N}{4:\n"
@@ -36,10 +29,8 @@ public class StressTransactionTest {
 
 		// Build a transaction.
 		SwiftBlockchainTransactionBuilder.getInstance()
-				.setRecipient(
-						EntityFactory.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec"))
-				.setSender(
-						EntityFactory.buildAccountFromPublicKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1"))
+				.setRecipient(this.recipientPublicAccount)
+				.setSender(this.senderPrivateAccount)
 				.buildTransaction(); // build only.
 	}
 	
@@ -52,9 +43,8 @@ public class StressTransactionTest {
 		try {
 			for (int i = 0; i < 500; i++) {
 				// test from a string.
-				final Account senderAccount = EntityFactory.buildAccountFromPrivateKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
-				final Account recipientAccount = EntityFactory
-						.buildAccountFromPublicKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+				final Account senderAccount = this.recipientPublicAccount;
+				final Account recipientAccount = this.recipientPublicAccount;
 
 				final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
 						new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
@@ -81,9 +71,8 @@ public class StressTransactionTest {
 		try {
 			for (int i = 0; i < 500; i++) {
 				// test from a string.
-				final Account senderAccount = EntityFactory.buildAccountFromPrivateKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
-				final Account recipientAccount = EntityFactory
-						.buildAccountFromPublicKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+				final Account senderAccount = this.senderPrivateAccount;
+				final Account recipientAccount = this.recipientPublicAccount;
 
 				final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
 						new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());

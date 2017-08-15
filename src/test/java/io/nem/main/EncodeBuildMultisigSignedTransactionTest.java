@@ -17,7 +17,7 @@ import io.nem.swift.crypto.SecureMessageSwiftPayloadEncoder;
 /**
  * The Class BuildTransactionTest.
  */
-public class EncodeBuildMultisigSignedTransactionTest {
+public class EncodeBuildMultisigSignedTransactionTest extends TransactionUnitTest {
 
 	/** The sample swift msg. */
 	final String sampleSwiftMsg = "{1:F21FOOLHKH0AXXX0304009999}{4:{177:1608140809}{451:0}}{1:F01FOOLHKH0AXXX0304009999}{2:O9401609160814FOOLHKH0AXXX03040027341608141609N}{4:\n"
@@ -35,27 +35,16 @@ public class EncodeBuildMultisigSignedTransactionTest {
 		// Build a transaction and send it.
 		try {
 
-			// test from a string.
-			final Account senderAccount = EntityFactory
-					.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
-			final Account recipientAccount = EntityFactory
-					.buildAccountFromPublicKey("2a3e60b33982593ed436979066d44dee626695b9348d91c625cef17b807fd4ac");
-			final Account multiSig = EntityFactory
-					.buildAccountFromPublicKey("10a10f929a30dd1d062ef5cb337a1d54c35fe8a25e7fd3699c12e5a74e338328");
+			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
+					this.recipientPublicAccount, sampleSwiftMsg.getBytes());
 
-			final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
-					sampleSwiftMsg.getBytes());
-			
 			final PlainMessage msg = new PlainMessage(sampleSwiftMsg.getBytes());
 
-			SwiftBlockchainTransactionBuilder.getInstance()
-					.setAmount(0l)
-					.setSender(senderAccount)
-					.setMultisig(multiSig)
-					.setRecipient(recipientAccount)
+			SwiftBlockchainTransactionBuilder.getInstance().setAmount(0l).setSender(this.senderPrivateAccount)
+					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount)
 					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendMultisigTransaction(); // build and send
-																// it!
+														// it!
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,25 +60,14 @@ public class EncodeBuildMultisigSignedTransactionTest {
 		// Build a transaction and send it.
 		try {
 
-			// test from a string.
-			final Account senderAccount = EntityFactory
-					.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
-			final Account recipientAccount = EntityFactory
-					.buildAccountFromPublicKey("2a3e60b33982593ed436979066d44dee626695b9348d91c625cef17b807fd4ac");
-			final Account multiSig = EntityFactory
-					.buildAccountFromPublicKey("10a10f929a30dd1d062ef5cb337a1d54c35fe8a25e7fd3699c12e5a74e338328");
-			
-			final SecureMessage message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount,
-					new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
-			
-			SwiftBlockchainTransactionBuilder.getInstance()
-					.setSender(senderAccount)
-					.setRecipient(recipientAccount)
-					.setMultisig(multiSig)
-					.setAmount(0l)
+			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
+					this.recipientPublicAccount, new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
+
+			SwiftBlockchainTransactionBuilder.getInstance().setSender(this.senderPrivateAccount)
+					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount).setAmount(0l)
 					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendMultisigTransaction();
-																// it!
+			// it!
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,24 +83,14 @@ public class EncodeBuildMultisigSignedTransactionTest {
 		// Build a transaction and send it.
 		try {
 
-			// test from a string.
-			final Account senderAccount = EntityFactory
-					.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
-			final Account recipientAccount = EntityFactory
-					.buildAccountFromPublicKey("2a3e60b33982593ed436979066d44dee626695b9348d91c625cef17b807fd4ac");
-			final Account multiSig = EntityFactory
-					.buildAccountFromPublicKey("10a10f929a30dd1d062ef5cb337a1d54c35fe8a25e7fd3699c12e5a74e338328");
-			
-			SecureMessage message = SecureMessageSwiftPayloadEncoder.encodeAndGzipCompress(senderAccount,
-					recipientAccount, sampleSwiftMsg);
+			SecureMessage message = SecureMessageSwiftPayloadEncoder.encodeAndGzipCompress(this.senderPrivateAccount,
+					this.recipientPublicAccount, sampleSwiftMsg);
 			TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
 			attachment.addMosaic(Utils.createMosaic(1).getMosaicId(), new Quantity(12));
 
-			SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount).setMultisig(multiSig)
+			SwiftBlockchainTransactionBuilder.getInstance().setSender(this.senderPrivateAccount)
+					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount)
 					.setAttachment(attachment).buildAndSendMultisigTransaction(); // build
-			// and
-			// send
-			// it!
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,23 +101,18 @@ public class EncodeBuildMultisigSignedTransactionTest {
 	 */
 	@Test
 	public void testCbBuildAndSendSwiftFileTransaction() {
-		
-		final Account senderAccount = EntityFactory
-				.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
-		final Account recipientAccount = EntityFactory
-				.buildAccountFromPublicKey("2a3e60b33982593ed436979066d44dee626695b9348d91c625cef17b807fd4ac");
-		final Account multiSig = EntityFactory
-				.buildAccountFromPublicKey("10a10f929a30dd1d062ef5cb337a1d54c35fe8a25e7fd3699c12e5a74e338328");
-		
+
 		SecureMessage message = null;
 		try {
-			message = SecureMessage.fromDecodedPayload(senderAccount, recipientAccount, sampleSwiftMsg.getBytes());
+			message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount, this.recipientPublicAccount,
+					sampleSwiftMsg.getBytes());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		// Build a transaction and send it.
 		try {
-			SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount).setMultisig(multiSig)
+			SwiftBlockchainTransactionBuilder.getInstance().setSender(this.senderPrivateAccount)
+					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount)
 					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendMultisigTransaction();
 

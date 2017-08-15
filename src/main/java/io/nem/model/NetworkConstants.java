@@ -1,6 +1,5 @@
 package io.nem.model;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class NetworkConstants.
  */
