@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/alvin-reyes/swift-blockchain-lib.svg?branch=master)](https://travis-ci.org/alvin-reyes/swift-blockchain-lib)
-
 # Swift / Blockchain Library for NEM.io Platform
 
 Java library to convert and send Swift Messages to NEM Blockchain and vice versa
