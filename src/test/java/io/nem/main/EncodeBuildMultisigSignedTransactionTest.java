@@ -1,5 +1,7 @@
 package io.nem.main;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.nem.core.messages.PlainMessage;
 import org.nem.core.messages.SecureMessage;
@@ -25,7 +27,6 @@ public class EncodeBuildMultisigSignedTransactionTest extends TransactionUnitTes
 			+ ":61:160827C642,S1032\n" + ":86:ANDY\n" + ":61:160827D42,S1032\n" + ":86:BANK CHARGES\n"
 			+ ":62F:C160418USD1872,\n" + ":64:C160418USD1872,\n" + "-}{5:{CHK:0FEC1E4AEC53}{TNG:}}{S:{COP:S}}";
 
-
 	/**
 	 * Test cb build and send transaction.
 	 */
@@ -34,7 +35,8 @@ public class EncodeBuildMultisigSignedTransactionTest extends TransactionUnitTes
 
 		// Build a transaction and send it.
 		try {
-
+			
+		
 			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
 					this.recipientPublicAccount, sampleSwiftMsg.getBytes());
 

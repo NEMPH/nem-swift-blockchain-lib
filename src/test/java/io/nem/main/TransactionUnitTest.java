@@ -1,5 +1,6 @@
 package io.nem.main;
 
+import org.junit.Assume;
 import org.nem.core.crypto.KeyPair;
 import org.nem.core.crypto.PrivateKey;
 import org.nem.core.crypto.PublicKey;
@@ -16,8 +17,7 @@ public abstract class TransactionUnitTest {
 	protected Account multiSigAccount;
 
 	public TransactionUnitTest() {
-		// generate dummy payload
-
+		Assume.assumeTrue(this.isTestable());
 	}
 
 	protected boolean isTestable() {
