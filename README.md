@@ -35,9 +35,9 @@ node.endpoint.port=7895
 			
 	//	set the account 
 	final Account senderAccount = EntityFactory
-			.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+			.buildAccountFromPrivateKey("<privatekey>");
 	final Account recipientAccount = EntityFactory
-			.buildAccountFromPublicKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
+			.buildAccountFromPublicKey("<publickey>");
 	
 	//	prepare the payload message.
 	SecureMessage message = SecureMessageSwiftPayloadEncoder.encodeAndGzipCompress(senderAccount, recipientAccount, sampleSwiftMsg);
@@ -59,9 +59,9 @@ node.endpoint.port=7895
 			
 	//	set the account 
 	final Account senderAccount = EntityFactory
-			.buildAccountFromPrivateKey("90951d4f876e3a15b8507532a051857e933a87269bc0da7400d1604bedc93aec");
+			.buildAccountFromPrivateKey("<privatekey>");
 	final Account recipientAccount = EntityFactory
-			.buildAccountFromPublicKey("c9d930757f69584fc414d0b2b54a0c3aa064996f9b13b70d32c89879724153c1");
+			.buildAccountFromPublicKey("<publickey>");
 	
 	//	Get the decoded message.
 	String decodedPayload = SecureMessageSwiftPayloadDecoder.decodeAndGzipUncompress(senderKeyPair, recipientKeyPairPriv,encryptedMessage);
