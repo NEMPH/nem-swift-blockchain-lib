@@ -5,17 +5,16 @@ import java.io.IOException;
 import org.nem.core.messages.SecureMessage;
 import org.nem.core.model.Account;
 import org.nem.core.model.TransferTransactionAttachment;
-
-import io.nem.builders.SwiftBlockchainTransactionBuilder;
+import io.nem.builders.SwiftTransactionBuilder;
+import io.nem.factories.AttachmentFactory;
 import io.nem.factories.EntityFactory;
 import io.nem.util.GzipUtils;
-
 
 /**
  * The Class StressTestAppTransaction.
  */
 public class StressTestAppTransaction extends TransactionUnitTest {
-	
+
 	/**
 	 * Instantiates a new stress test app transaction.
 	 */
@@ -29,10 +28,8 @@ public class StressTestAppTransaction extends TransactionUnitTest {
 
 			for (int i = 0; i < 500; i++) {
 
-				final Account senderAccount = EntityFactory
-						.buildAccountFromPrivateKey("<privatekey>");
-				final Account recipientAccount = EntityFactory
-						.buildAccountFromPublicKey("<public>");
+				final Account senderAccount = EntityFactory.buildAccountFromPrivateKey("<privatekey>");
+				final Account recipientAccount = EntityFactory.buildAccountFromPublicKey("<public>");
 
 				SecureMessage message;
 				try {
@@ -41,13 +38,14 @@ public class StressTestAppTransaction extends TransactionUnitTest {
 
 					TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
 
-					SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount)
-							.setRecipient(recipientAccount).setAttachment(attachment).buildAndSendTransaction();
+					SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+							.amount(0l).attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+							.buildAndSendTransaction();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +54,8 @@ public class StressTestAppTransaction extends TransactionUnitTest {
 	/**
 	 * The main method.
 	 *
-	 * @param args the arguments
+	 * @param args
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
 		new StressTestAppTransaction();

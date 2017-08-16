@@ -39,11 +39,13 @@ final Account recipientAccount = EntityFactory.buildAccountFromPublicKey("<publi
 SecureMessage message = SecureMessageSwiftPayloadEncoder.encodeAndGzipCompress(senderAccount, recipientAccount, sampleSwiftMsg);
 
 // use the builder to build and send the transaction.
-SwiftBlockchainTransactionBuilder.getInstance()
-		.setSender(senderAccount)
-		.setRecipient(recipientAccount)
-		.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
-		.buildAndSendTransaction(); // build and send it!
+SwiftTransactionBuilder
+	.sender(this.senderPrivateAccount)
+	.recipient(this.recipientPublicAccount)
+	.amount(0l)
+	.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+	.buildAndSendTransaction();
+	
 ```
 
 <h4>Decode Swift File/Text</h4>
@@ -76,11 +78,18 @@ To test the funtionality with real data, set the sender, recipient and multisig 
 
 ```java
 
-@Before
+@Before // for encoding.
 public void init() {
     this.setAccountMultisigAccountPublicKey(...);
     this.setAccountSenderPrivateKey(...);
     this.setAccountRecipientPublicKey(...);
+}
+
+@Before // for decoding.
+public void init() {
+    this.setAccountMultisigAccountPublicKey(...);
+    this.setAccountSenderPublicKey(...);
+    this.setAccountRecipientPrivateKey(...);
 }
 
 ```

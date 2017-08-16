@@ -1,38 +1,18 @@
 package io.nem.main;
 
-import java.io.IOException;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit4ClassRunner;
-import org.junit.runner.RunWith;
-import org.nem.core.crypto.PublicKey;
-import org.nem.core.messages.PlainMessage;
 import org.nem.core.messages.SecureMessage;
-import org.nem.core.model.Account;
-import org.nem.core.model.Address;
-import org.nem.core.model.HashMetaData;
-import org.nem.core.model.HashMetaDataPair;
 import org.nem.core.model.MultisigTransaction;
 import org.nem.core.model.TransferTransactionAttachment;
-import org.nem.core.model.observers.TransactionHashesNotification;
 import org.nem.core.model.primitive.Amount;
 import org.nem.core.model.primitive.Quantity;
 import org.nem.core.test.Utils;
-import org.nem.core.time.TimeInstant;
-import org.nem.core.utils.Base32Encoder;
-
 import com.prowidesoftware.swift.io.ConversionService;
-
-import io.nem.builders.SwiftBlockchainTransactionBuilder;
+import io.nem.builders.SwiftMultisigTransactionBuilder;
+import io.nem.builders.SwiftTransactionBuilder;
 import io.nem.factories.AttachmentFactory;
-import io.nem.factories.EntityFactory;
-import io.nem.model.TransactionMessageType;
 import io.nem.swift.crypto.SecureMessageSwiftPayloadEncoder;
-import io.nem.util.GzipUtils;
 import io.nem.util.TransactionSenderUtil;
-
 
 /**
  * The Class BuildTransactionTest.
@@ -45,16 +25,14 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 			+ ":61:160827C642,S1032\n" + ":86:ANDY\n" + ":61:160827D42,S1032\n" + ":86:BANK CHARGES\n"
 			+ ":62F:C160418USD1872,\n" + ":64:C160418USD1872,\n" + "-}{5:{CHK:0FEC1E4AEC53}{TNG:}}{S:{COP:S}}";
 
-
 	/**
 	 * Test cb build transaction.
 	 */
 	@Test
 	public void testCbBuildTransaction() {
 
-		// Build a transaction.
-		SwiftBlockchainTransactionBuilder.getInstance().setRecipient(this.recipientPublicAccount).setSender(this.senderPrivateAccount)
-				.buildTransaction(); // build only.
+		SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount).amount(0l)
+				.attachment(null).buildAndSendTransaction();
 	}
 
 	/**
@@ -64,8 +42,8 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 	public void testCbBuildAndSendTransactionWOAttachment() {
 		// Build a transaction and send it.
 		try {
-			SwiftBlockchainTransactionBuilder.getInstance().setRecipient(this.recipientPublicAccount).setSender(this.senderPrivateAccount)
-					.buildAndSendTransaction(); // build and send it!
+			SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount).amount(0l)
+					.attachment(null).buildAndSendTransaction();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,13 +59,13 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 		// Build a transaction and send it.
 		try {
 
-			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount, this.recipientPublicAccount,
-					sampleSwiftMsg.getBytes());
+			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
+					this.recipientPublicAccount, sampleSwiftMsg.getBytes());
 
-			SwiftBlockchainTransactionBuilder.getInstance().setAmount(0l).setSender(this.senderPrivateAccount)
-					.setRecipient(this.recipientPublicAccount)
-					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
-					.buildAndSendTransaction(); // build and send it!
+			SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+					.buildAndSendTransaction();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,12 +81,12 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 		// Build a transaction and send it.
 		try {
 
-			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount, this.recipientPublicAccount,
-					new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
+			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
+					this.recipientPublicAccount, new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
 
-			SwiftBlockchainTransactionBuilder.getInstance().setRecipient(this.recipientPublicAccount).setSender(this.senderPrivateAccount)
-					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
-					.buildAndSendTransaction(); // build and send it!
+			SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+					.buildAndSendTransaction();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,12 +102,14 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 		// Build a transaction and send it.
 		try {
 
-			SecureMessage message = SecureMessageSwiftPayloadEncoder.encodeAndGzipCompress(this.senderPrivateAccount, this.recipientPublicAccount, sampleSwiftMsg);
+			SecureMessage message = SecureMessageSwiftPayloadEncoder.encodeAndGzipCompress(this.senderPrivateAccount,
+					this.recipientPublicAccount, sampleSwiftMsg);
 			TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
 			attachment.addMosaic(Utils.createMosaic(1).getMosaicId(), new Quantity(12));
 
-			SwiftBlockchainTransactionBuilder.getInstance().setSender(this.senderPrivateAccount).setRecipient(this.recipientPublicAccount)
-					.setAttachment(attachment).buildAndSendTransaction();
+			SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+					.buildAndSendTransaction();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,15 +123,16 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 
 		SecureMessage message = null;
 		try {
-			message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount, this.recipientPublicAccount, sampleSwiftMsg.getBytes());
+			message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount, this.recipientPublicAccount,
+					sampleSwiftMsg.getBytes());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		// Build a transaction and send it.
 		try {
-			MultisigTransaction multiSigTrans = (MultisigTransaction) SwiftBlockchainTransactionBuilder.getInstance()
-					.setSender(this.senderPrivateAccount).setRecipient(this.recipientPublicAccount)
-					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
+			MultisigTransaction multiSigTrans = SwiftMultisigTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+					.multisig(this.multiSigAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildMultisigTransaction();
 
 			multiSigTrans.setFee(Amount.fromNem(0));

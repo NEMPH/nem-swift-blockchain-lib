@@ -2,19 +2,9 @@ package io.nem.main;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
 import org.junit.Test;
-import org.nem.core.crypto.KeyPair;
-import org.nem.core.crypto.PrivateKey;
-import org.nem.core.crypto.PublicKey;
-import org.nem.core.messages.SecureMessage;
-import org.nem.core.model.Account;
-import org.nem.core.model.Address;
-import org.nem.core.utils.HexEncoder;
 
 import io.nem.swift.crypto.SecureMessageSwiftPayloadDecoder;
-import io.nem.util.GzipUtils;
 
 
 /**
@@ -27,14 +17,14 @@ public class DecodeBuildTransactionTest extends TransactionUnitTest {
 	
 	/** The simple payload. */
 	final String simplePayload = "2e66cc91dc415cb8c51ab5ffc8f38724119a417d86ecfcfc2169576ac224ca92f1081ea1541eb0ef1badfc3cd0f8f4a22967f31f1775057b4b690baf07262fb5eb0e9682df212ce774d4956736c16b9c";
-
+	
 	/**
 	 * Test transaction hash.
 	 */
 	@Test
 	public void testDecode() {
 		try {
-			if(isTestable())assertNotNull("Decode process completed.", SecureMessageSwiftPayloadDecoder.decodeAndGzipUncompress(this.senderPrivateKeyPair,this.recipientPublicKeyPair,sampleSwiftMsg));
+			if(isTestable())assertNotNull("Decode process completed.", SecureMessageSwiftPayloadDecoder.decodeAndGzipUncompress(this.senderPublicKeyPair,this.recipientPrivateKeyPair,sampleSwiftMsg));
 			else assertTrue("Unit Test is not testable", !isTestable());
 		} catch (Exception e) {
 			e.printStackTrace();

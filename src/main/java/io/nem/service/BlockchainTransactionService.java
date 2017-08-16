@@ -10,6 +10,9 @@ import org.nem.core.model.TransferTransaction;
 import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.model.primitive.Amount;
 import org.nem.core.time.TimeInstant;
+
+import io.nem.model.SwiftMultisigTransaction;
+import io.nem.model.SwiftTransaction;
 import io.nem.model.TransactionBlock;
 import io.nem.util.AppPropertiesUtil;
 import io.nem.util.TransactionSenderUtil;
@@ -51,10 +54,10 @@ public class BlockchainTransactionService {
 	 *
 	 * @param tBlock the t block
 	 */
-	public static void createAndSendTransaction(final TransactionBlock tBlock) {
+	public static void createAndSendTransaction(final SwiftTransaction tBlock) {
 
-		final Transaction transaction = createTransaction(tBlock.getTimeInstant(), tBlock.getSender(),
-				tBlock.getRecipient(), tBlock.getAmount(), tBlock.getAttachment());
+		final Transaction transaction = createTransaction(tBlock.getTimeInstant(), tBlock.getSenderAccount(),
+				tBlock.getRecipientAccount(), tBlock.getAmount(), tBlock.getAttachment());
 		transaction.sign();
 		TransactionSenderUtil.sendTransaction(transaction);
 	}
@@ -64,13 +67,13 @@ public class BlockchainTransactionService {
 	 *
 	 * @param tBlock the t block
 	 */
-	public static void createAndSendMultisigTransaction(final TransactionBlock tBlock) {
+	public static void createAndSendMultisigTransaction(final SwiftMultisigTransaction tBlock) {
 
-		final Transaction transaction = createTransaction(tBlock.getTimeInstant(), tBlock.getMulitSig(),
-				tBlock.getRecipient(), tBlock.getAmount(), tBlock.getAttachment());
+		final Transaction transaction = createTransaction(tBlock.getTimeInstant(), tBlock.getMultisigAccount(),
+				tBlock.getRecipientAccount(), tBlock.getAmount(), tBlock.getAttachment());
 
 		final Transaction multiSigSignedTransaction = createMultisigTransaction(tBlock.getTimeInstant(),
-				tBlock.getSender(), tBlock.getRecipient(), tBlock.getAmount(), transaction);
+				tBlock.getSenderAccount(), tBlock.getRecipientAccount(), tBlock.getAmount(), transaction);
 		
 		multiSigSignedTransaction.sign();
 		TransactionSenderUtil.sendTransaction(multiSigSignedTransaction);
@@ -140,8 +143,6 @@ public class BlockchainTransactionService {
 			final Account recipient, final long amount, final Transaction transaction) {
 
 		final MultisigTransaction multiSigSignedTransaction = new MultisigTransaction(timeInstant, sender, transaction);
-
-		multiSigSignedTransaction.setFee(Amount.fromNem(0));
 		multiSigSignedTransaction.setDeadline(timeInstant.addHours(23));
 		
 		return multiSigSignedTransaction;

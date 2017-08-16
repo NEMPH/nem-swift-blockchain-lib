@@ -7,9 +7,8 @@ import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.model.primitive.Quantity;
 import org.nem.core.test.Utils;
 import com.prowidesoftware.swift.io.ConversionService;
-import io.nem.builders.SwiftBlockchainTransactionBuilder;
-import io.nem.factories.EntityFactory;
-
+import io.nem.builders.SwiftTransactionBuilder;
+import io.nem.factories.AttachmentFactory;
 
 /**
  * The Class BuildTransactionTest.
@@ -29,12 +28,11 @@ public class StressTransactionTest extends TransactionUnitTest {
 	public void testCbBuildTransaction() {
 
 		// Build a transaction.
-		SwiftBlockchainTransactionBuilder.getInstance()
-				.setRecipient(this.recipientPublicAccount)
-				.setSender(this.senderPrivateAccount)
-				.buildTransaction(); // build only.
+		SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount).amount(0l)
+				.buildTransaction();
+
 	}
-	
+
 	/**
 	 * Test cb build and send swift transaction with mosaic.
 	 */
@@ -52,11 +50,9 @@ public class StressTransactionTest extends TransactionUnitTest {
 
 				TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
 
-				SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount)
-						.setAttachment(attachment).buildAndSendTransaction(); // build
-																				// and
-																				// send
-																				// it!
+				SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+						.amount(0l).attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+						.buildAndSendTransaction();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,11 +77,9 @@ public class StressTransactionTest extends TransactionUnitTest {
 				TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
 				attachment.addMosaic(Utils.createMosaic(1).getMosaicId(), new Quantity(12));
 
-				SwiftBlockchainTransactionBuilder.getInstance().setSender(senderAccount).setRecipient(recipientAccount)
-						.setAttachment(attachment).buildAndSendTransaction(); // build
-																				// and
-																				// send
-																				// it!
+				SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+						.amount(0l).attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+						.buildAndSendTransaction();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

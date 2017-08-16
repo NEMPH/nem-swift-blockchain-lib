@@ -1,21 +1,15 @@
 package io.nem.main;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.nem.core.messages.PlainMessage;
 import org.nem.core.messages.SecureMessage;
-import org.nem.core.model.Account;
-import org.nem.core.model.Address;
 import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.model.primitive.Quantity;
 import org.nem.core.test.Utils;
 import com.prowidesoftware.swift.io.ConversionService;
-import io.nem.builders.SwiftBlockchainTransactionBuilder;
+import io.nem.builders.SwiftMultisigTransactionBuilder;
 import io.nem.factories.AttachmentFactory;
-import io.nem.factories.EntityFactory;
 import io.nem.swift.crypto.SecureMessageSwiftPayloadEncoder;
-
 
 /**
  * The Class BuildTransactionTest.
@@ -36,18 +30,17 @@ public class EncodeBuildMultisigSignedTransactionTest extends TransactionUnitTes
 
 		// Build a transaction and send it.
 		try {
-			
-		
+
 			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
 					this.recipientPublicAccount, sampleSwiftMsg.getBytes());
 
 			final PlainMessage msg = new PlainMessage(sampleSwiftMsg.getBytes());
 
-			SwiftBlockchainTransactionBuilder.getInstance().setAmount(0l).setSender(this.senderPrivateAccount)
-					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount)
-					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
-					.buildAndSendMultisigTransaction(); // build and send
-														// it!
+			SwiftMultisigTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+					.multisig(this.multiSigAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+					.buildAndSendMultisigTransaction();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -66,9 +59,9 @@ public class EncodeBuildMultisigSignedTransactionTest extends TransactionUnitTes
 			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
 					this.recipientPublicAccount, new ConversionService().getXml(this.sampleSwiftMsg, true).getBytes());
 
-			SwiftBlockchainTransactionBuilder.getInstance().setSender(this.senderPrivateAccount)
-					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount).setAmount(0l)
-					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
+			SwiftMultisigTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+					.multisig(this.multiSigAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendMultisigTransaction();
 			// it!
 		} catch (Exception e) {
@@ -90,10 +83,10 @@ public class EncodeBuildMultisigSignedTransactionTest extends TransactionUnitTes
 					this.recipientPublicAccount, sampleSwiftMsg);
 			TransferTransactionAttachment attachment = new TransferTransactionAttachment(message);
 			attachment.addMosaic(Utils.createMosaic(1).getMosaicId(), new Quantity(12));
-
-			SwiftBlockchainTransactionBuilder.getInstance().setSender(this.senderPrivateAccount)
-					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount)
-					.setAttachment(attachment).buildAndSendMultisigTransaction(); // build
+			SwiftMultisigTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+					.multisig(this.multiSigAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
+					.buildAndSendMultisigTransaction();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,9 +107,9 @@ public class EncodeBuildMultisigSignedTransactionTest extends TransactionUnitTes
 		}
 		// Build a transaction and send it.
 		try {
-			SwiftBlockchainTransactionBuilder.getInstance().setSender(this.senderPrivateAccount)
-					.setMultisig(this.multiSigAccount).setRecipient(this.recipientPublicAccount)
-					.setAttachment(AttachmentFactory.createTransferTransactionAttachment(message))
+			SwiftMultisigTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
+					.multisig(this.multiSigAccount).amount(0l)
+					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendMultisigTransaction();
 
 		} catch (Exception e) {
