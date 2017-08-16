@@ -8,6 +8,7 @@ import io.nem.model.TransactionBlock;
 import io.nem.service.Globals;
 import io.nem.service.BlockchainTransactionService;
 
+
 /**
  * The Class TransactionBuilder.
  */
@@ -45,6 +46,12 @@ public class SwiftBlockchainTransactionBuilder {
 		return this;
 	}
 
+	/**
+	 * Sets the multisig.
+	 *
+	 * @param multiSig the multi sig
+	 * @return the swift blockchain transaction builder
+	 */
 	public SwiftBlockchainTransactionBuilder setMultisig(Account multiSig) {
 		tBlock.setMulitSig(multiSig);
 		return this;
@@ -99,6 +106,11 @@ public class SwiftBlockchainTransactionBuilder {
 				tBlock.getRecipient(), tBlock.getAmount(), tBlock.getAttachment());
 	}
 
+	/**
+	 * Builds the multisig transaction.
+	 *
+	 * @return the transaction
+	 */
 	public Transaction buildMultisigTransaction() {
 		if (tBlock.getTimeInstant() == null) {
 			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());
@@ -123,6 +135,9 @@ public class SwiftBlockchainTransactionBuilder {
 
 	}
 
+	/**
+	 * Builds the and send multisig transaction.
+	 */
 	public void buildAndSendMultisigTransaction() {
 		if (tBlock.getTimeInstant() == null) {
 			tBlock.setTimeInstant(Globals.TIME_PROVIDER.getCurrentTime());

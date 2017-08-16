@@ -1,5 +1,6 @@
 package io.nem.model;
 
+
 /**
  * The Enum TransactionMessageType.
  */

@@ -33,6 +33,7 @@ import io.nem.swift.crypto.SecureMessageSwiftPayloadEncoder;
 import io.nem.util.GzipUtils;
 import io.nem.util.TransactionSenderUtil;
 
+
 /**
  * The Class BuildTransactionTest.
  */

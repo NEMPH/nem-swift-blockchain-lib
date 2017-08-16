@@ -6,6 +6,7 @@ import org.junit.Test;
 import com.prowidesoftware.swift.model.mt.AbstractMT;
 import com.prowidesoftware.swift.model.mt.mt1xx.MT103_STP;
 
+
 /**
  * The Class BuildTransactionTest.
  */

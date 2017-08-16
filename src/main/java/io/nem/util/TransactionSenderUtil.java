@@ -16,11 +16,20 @@ import org.nem.core.serialization.Deserializer;
 
 import io.nem.service.Globals;
 
+
+/**
+ * The Class TransactionSenderUtil.
+ */
 public class TransactionSenderUtil {
 	
 	/** The Constant LOGGER. */
 	private static final Logger LOGGER = Logger.getLogger(TransactionSenderUtil.class.getName());
 
+	/**
+	 * Send transaction.
+	 *
+	 * @param transaction the transaction
+	 */
 	public static void sendTransaction(Transaction transaction) {
 		
 		final byte[] data = BinarySerializer.serializeToBytes(transaction.asNonVerifiable());

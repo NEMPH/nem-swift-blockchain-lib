@@ -7,6 +7,7 @@ import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.time.TimeInstant;
 
 
+
 /**
  * The Class TransactionBlock.
  */
@@ -21,14 +22,25 @@ public class TransactionBlock implements Serializable {
 	/** The recipient. */
 	private Account recipient;
 	
+	/**
+	 * Gets the mulit sig.
+	 *
+	 * @return the mulit sig
+	 */
 	public Account getMulitSig() {
 		return mulitSig;
 	}
 
+	/**
+	 * Sets the mulit sig.
+	 *
+	 * @param mulitSig the new mulit sig
+	 */
 	public void setMulitSig(Account mulitSig) {
 		this.mulitSig = mulitSig;
 	}
 
+	/** The mulit sig. */
 	private Account mulitSig;
 
 	/** The amount. */

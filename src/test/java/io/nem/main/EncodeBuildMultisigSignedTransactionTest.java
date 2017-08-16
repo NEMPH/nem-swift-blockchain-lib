@@ -16,6 +16,7 @@ import io.nem.factories.AttachmentFactory;
 import io.nem.factories.EntityFactory;
 import io.nem.swift.crypto.SecureMessageSwiftPayloadEncoder;
 
+
 /**
  * The Class BuildTransactionTest.
  */

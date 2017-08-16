@@ -10,8 +10,15 @@ import io.nem.builders.SwiftBlockchainTransactionBuilder;
 import io.nem.factories.EntityFactory;
 import io.nem.util.GzipUtils;
 
+
+/**
+ * The Class StressTestAppTransaction.
+ */
 public class StressTestAppTransaction extends TransactionUnitTest {
 	
+	/**
+	 * Instantiates a new stress test app transaction.
+	 */
 	public StressTestAppTransaction() {
 		String sampleSwiftMsg = "{1:F21FOOLHKH0AXXX0304009999}{4:{177:1608140809}{451:0}}{1:F01FOOLHKH0AXXX0304009999}{2:O9401609160814FOOLHKH0AXXX03040027341608141609N}{4:\n"
 				+ ":20:USD940NO1\n" + ":21:123456/DEV\n" + ":25:USD234567\n" + ":28C:1/1\n" + ":60F:C160418USD672,\n"
@@ -46,6 +53,11 @@ public class StressTestAppTransaction extends TransactionUnitTest {
 		}
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		new StressTestAppTransaction();
 	}

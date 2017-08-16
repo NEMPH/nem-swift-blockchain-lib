@@ -10,6 +10,7 @@ import com.prowidesoftware.swift.io.ConversionService;
 import io.nem.builders.SwiftBlockchainTransactionBuilder;
 import io.nem.factories.EntityFactory;
 
+
 /**
  * The Class BuildTransactionTest.
  */

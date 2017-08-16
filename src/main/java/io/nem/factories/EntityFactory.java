@@ -6,6 +6,7 @@ import org.nem.core.crypto.PublicKey;
 import org.nem.core.model.Account;
 import org.nem.core.model.Address;
 
+
 /**
  * A factory for creating Entity objects.
  */
@@ -45,14 +46,32 @@ public class EntityFactory {
 		return new Account(new KeyPair(PrivateKey.fromHexString(privateKeyHex)));
 	}
 
+	/**
+	 * Builds the account from public key.
+	 *
+	 * @param publicKeyHex the public key hex
+	 * @return the account
+	 */
 	public static Account buildAccountFromPublicKey(String publicKeyHex) {
 		return new Account(new KeyPair(PublicKey.fromHexString(publicKeyHex)));
 	}
 
+	/**
+	 * Builds the key pair from public key.
+	 *
+	 * @param publicKeyHex the public key hex
+	 * @return the key pair
+	 */
 	public static KeyPair buildKeyPairFromPublicKey(String publicKeyHex) {
 		return new KeyPair(PublicKey.fromHexString(publicKeyHex));
 	}
 
+	/**
+	 * Builds the key pair from private key.
+	 *
+	 * @param publicKeyHex the public key hex
+	 * @return the key pair
+	 */
 	public static KeyPair buildKeyPairFromPrivateKey(String publicKeyHex) {
 		return new KeyPair(PrivateKey.fromHexString(publicKeyHex));
 	}

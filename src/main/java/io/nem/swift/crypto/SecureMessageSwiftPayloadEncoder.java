@@ -9,6 +9,7 @@ import org.nem.core.model.Account;
 import io.nem.factories.EntityFactory;
 import io.nem.util.GzipUtils;
 
+
 /**
  * The Class SecureMessageSwiftPayloadEncoder.
  *
