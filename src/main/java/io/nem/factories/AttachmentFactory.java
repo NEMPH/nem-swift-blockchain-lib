@@ -3,6 +3,7 @@ import org.nem.core.model.Message;
 import org.nem.core.model.TransferTransactionAttachment;
 
 
+
 /**
  * A factory for creating Attachment objects.
  */

@@ -10,26 +10,44 @@ import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.model.primitive.Amount;
 import org.nem.core.time.TimeInstant;
 
+
+/**
+ * The Class SwiftMultisigTransaction.
+ */
 public class SwiftMultisigTransaction implements Serializable {
 
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The fee. */
 	private Amount fee;
 	
+	/** The signature. */
 	private Signature signature;
 	
+	/**
+	 * Gets the deadline.
+	 *
+	 * @return the deadline
+	 */
 	public TimeInstant getDeadline() {
 		return deadline;
 	}
 
+	/**
+	 * Sets the deadline.
+	 *
+	 * @param deadline the new deadline
+	 */
 	public void setDeadline(TimeInstant deadline) {
 		this.deadline = deadline;
 	}
 
+	/** The deadline. */
 	private TimeInstant deadline;
 	
+	/** The multisig signature. */
 	private MultisigSignatureTransaction multisigSignature;
 
 	/** The sender. */
@@ -38,26 +56,56 @@ public class SwiftMultisigTransaction implements Serializable {
 	/** The recipient. */
 	private Account recipientAccount;
 
+	/**
+	 * Gets the fee.
+	 *
+	 * @return the fee
+	 */
 	public Amount getFee() {
 		return fee;
 	}
 
+	/**
+	 * Sets the fee.
+	 *
+	 * @param fee the new fee
+	 */
 	public void setFee(Amount fee) {
 		this.fee = fee;
 	}
 
+	/**
+	 * Gets the signature.
+	 *
+	 * @return the signature
+	 */
 	public Signature getSignature() {
 		return signature;
 	}
 
+	/**
+	 * Sets the signature.
+	 *
+	 * @param signature the new signature
+	 */
 	public void setSignature(Signature signature) {
 		this.signature = signature;
 	}
 
+	/**
+	 * Gets the multisig signature.
+	 *
+	 * @return the multisig signature
+	 */
 	public MultisigSignatureTransaction getMultisigSignature() {
 		return multisigSignature;
 	}
 
+	/**
+	 * Adds the multisig signature.
+	 *
+	 * @param multisigSignature the multisig signature
+	 */
 	public void addMultisigSignature(MultisigSignatureTransaction multisigSignature) {
 		this.multisigSignature = multisigSignature;
 	}
@@ -74,8 +122,7 @@ public class SwiftMultisigTransaction implements Serializable {
 	/**
 	 * Sets the mulit sig.
 	 *
-	 * @param mulitSig
-	 *            the new mulit sig
+	 * @param multisig the new multisig account
 	 */
 	public void setMultisigAccount(Account multisig) {
 		this.multisig = multisig;

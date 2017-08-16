@@ -18,6 +18,7 @@ import io.nem.util.AppPropertiesUtil;
 import io.nem.util.TransactionSenderUtil;
 
 
+
 /**
  * The Class TransactionService.
  */
@@ -71,7 +72,7 @@ public class BlockchainTransactionService {
 
 		final Transaction transaction = createTransaction(tBlock.getTimeInstant(), tBlock.getMultisigAccount(),
 				tBlock.getRecipientAccount(), tBlock.getAmount(), tBlock.getAttachment());
-
+		
 		final Transaction multiSigSignedTransaction = createMultisigTransaction(tBlock.getTimeInstant(),
 				tBlock.getSenderAccount(), tBlock.getRecipientAccount(), tBlock.getAmount(), transaction);
 		

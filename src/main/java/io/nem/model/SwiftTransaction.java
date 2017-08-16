@@ -8,6 +8,10 @@ import org.nem.core.model.TransferTransactionAttachment;
 import org.nem.core.model.primitive.Amount;
 import org.nem.core.time.TimeInstant;
 
+
+/**
+ * The Class SwiftTransaction.
+ */
 public class SwiftTransaction implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -19,32 +23,65 @@ public class SwiftTransaction implements Serializable {
 	/** The recipient. */
 	private Account recipient;
 	
+	/** The fee. */
 	private Amount fee;
 	
+	/** The signature. */
 	private Signature signature;
 	
+	/** The deadline. */
 	private TimeInstant deadline;
 
+	/**
+	 * Gets the fee.
+	 *
+	 * @return the fee
+	 */
 	public Amount getFee() {
 		return fee;
 	}
 
+	/**
+	 * Sets the fee.
+	 *
+	 * @param fee the new fee
+	 */
 	public void setFee(Amount fee) {
 		this.fee = fee;
 	}
 
+	/**
+	 * Gets the signature.
+	 *
+	 * @return the signature
+	 */
 	public Signature getSignature() {
 		return signature;
 	}
 
+	/**
+	 * Sets the signature.
+	 *
+	 * @param signature the new signature
+	 */
 	public void setSignature(Signature signature) {
 		this.signature = signature;
 	}
 
+	/**
+	 * Gets the deadline.
+	 *
+	 * @return the deadline
+	 */
 	public TimeInstant getDeadline() {
 		return deadline;
 	}
 
+	/**
+	 * Sets the deadline.
+	 *
+	 * @param deadline the new deadline
+	 */
 	public void setDeadline(TimeInstant deadline) {
 		this.deadline = deadline;
 	}

@@ -12,6 +12,7 @@ import org.nem.core.utils.HexEncoder;
 import io.nem.util.GzipUtils;
 
 
+
 /**
  * The Class SecureMessageSwiftPayloadDecoder.
  */

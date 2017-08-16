@@ -9,6 +9,7 @@ import org.nem.core.model.primitive.Quantity;
 import org.nem.core.test.Utils;
 import com.prowidesoftware.swift.io.ConversionService;
 import io.nem.builders.SwiftMultisigTransactionBuilder;
+import io.nem.builders.SwiftSecureMessageAttachmentBuilder;
 import io.nem.builders.SwiftTransactionBuilder;
 import io.nem.factories.AttachmentFactory;
 import io.nem.swift.crypto.SecureMessageSwiftPayloadEncoder;
