@@ -62,7 +62,7 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 
 			final SecureMessage message = SecureMessage.fromDecodedPayload(this.senderPrivateAccount,
 					this.recipientPublicAccount, sampleSwiftMsg.getBytes());
-
+	
 			SwiftTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount).amount(0l)
 					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildAndSendTransaction();
@@ -131,8 +131,8 @@ public class EncodeBuildTransactionTest extends TransactionUnitTest {
 		}
 		// Build a transaction and send it.
 		try {
-			MultisigTransaction multiSigTrans = SwiftMultisigTransactionBuilder.sender(this.senderPrivateAccount).recipient(this.recipientPublicAccount)
-					.multisig(this.multiSigAccount).amount(0l)
+			MultisigTransaction multiSigTrans = SwiftMultisigTransactionBuilder.sender(this.senderPrivateAccount)
+					.recipient(this.recipientPublicAccount).multisig(this.multiSigAccount).amount(0l)
 					.attachment(AttachmentFactory.createTransferTransactionAttachment(message))
 					.buildMultisigTransaction();
 

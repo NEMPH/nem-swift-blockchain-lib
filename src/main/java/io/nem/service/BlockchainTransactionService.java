@@ -3,6 +3,7 @@ package io.nem.service;
 
 import java.util.logging.Logger;
 import org.nem.core.model.Account;
+import org.nem.core.model.MultisigSignatureTransaction;
 import org.nem.core.model.MultisigTransaction;
 import org.nem.core.model.NetworkInfos;
 import org.nem.core.model.Transaction;
@@ -19,6 +20,7 @@ import io.nem.util.TransactionSenderUtil;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class TransactionService.
  */
@@ -61,6 +63,8 @@ public class BlockchainTransactionService {
 				tBlock.getRecipientAccount(), tBlock.getAmount(), tBlock.getAttachment());
 		transaction.sign();
 		TransactionSenderUtil.sendTransaction(transaction);
+		
+		
 	}
 
 	/**
@@ -80,6 +84,23 @@ public class BlockchainTransactionService {
 		TransactionSenderUtil.sendTransaction(multiSigSignedTransaction);
 	}
 
+	/**
+	 * Creates the and send multisig signature transaction.
+	 *
+	 * @param tBlock the t block
+	 */
+	public static void createAndSendMultisigSignatureTransaction(final SwiftMultisigTransaction tBlock) {
+
+		final Transaction transaction = createTransaction(tBlock.getTimeInstant(), tBlock.getMultisigAccount(),
+				tBlock.getRecipientAccount(), tBlock.getAmount(), tBlock.getAttachment());
+		
+		final Transaction multiSigSignedTransaction = createMultisigSignatureTransaction(tBlock.getTimeInstant(),
+				tBlock.getSenderAccount(), tBlock.getMultisigAccount(), tBlock.getAmount(), transaction);
+		
+		multiSigSignedTransaction.sign();
+		TransactionSenderUtil.sendTransaction(multiSigSignedTransaction);
+	}
+	
 	/**
 	 * Creates the and send transaction.
 	 *
@@ -149,4 +170,23 @@ public class BlockchainTransactionService {
 		return multiSigSignedTransaction;
 	}
 
+	
+	/**
+	 * Creates the multisig signature transaction.
+	 *
+	 * @param timeInstant the time instant
+	 * @param sender the sender
+	 * @param multisig the multisig
+	 * @param amount the amount
+	 * @param transaction the transaction
+	 * @return the transaction
+	 */
+	public static Transaction createMultisigSignatureTransaction(final TimeInstant timeInstant, final Account sender,
+			final Account multisig, final long amount, final Transaction transaction) {
+
+		final MultisigSignatureTransaction multiSigSignedTransaction = new MultisigSignatureTransaction(timeInstant, sender,multisig,transaction);
+		multiSigSignedTransaction.setDeadline(timeInstant.addHours(23));
+		
+		return multiSigSignedTransaction;
+	}
 }

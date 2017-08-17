@@ -43,27 +43,16 @@ public class SwiftTransactionBuilder {
 		 * @param recipient the recipient
 		 * @return the i recipient
 		 */
-		IRecipient recipient(Account recipient);
+		IBuild recipient(Account recipient);
 	}
 
-	/**
-	 * The Interface IRecipient.
-	 */
-	public interface IRecipient {
-		
-		/**
-		 * Amount.
-		 *
-		 * @param amount the amount
-		 * @return the i build
-		 */
-		IBuild amount(Long amount);
-	}
 
 	/**
 	 * The Interface IBuild.
 	 */
 	public interface IBuild {
+		
+		IBuild amount(Long amount);
 		
 		/**
 		 * Attachment.
@@ -115,7 +104,7 @@ public class SwiftTransactionBuilder {
 	/**
 	 * The Class Builder.
 	 */
-	private static class Builder implements ISender, IRecipient, IBuild {
+	private static class Builder implements ISender, IBuild {
 		
 		/** The instance. */
 		private SwiftTransaction instance = new SwiftTransaction();
@@ -142,7 +131,7 @@ public class SwiftTransactionBuilder {
 		 * @see io.nem.builders.SwiftTransactionBuilder.ISender#recipient(org.nem.core.model.Account)
 		 */
 		@Override
-		public IRecipient recipient(Account recipient) {
+		public IBuild recipient(Account recipient) {
 			instance.setRecipientAccount(recipient);
 			return this;
 		}
