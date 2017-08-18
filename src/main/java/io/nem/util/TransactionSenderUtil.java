@@ -11,6 +11,7 @@ import org.nem.core.model.Transaction;
 import org.nem.core.model.ncc.NemAnnounceResult;
 import org.nem.core.model.ncc.RequestAnnounce;
 import org.nem.core.node.NodeEndpoint;
+import org.nem.core.serialization.BinaryDeserializer;
 import org.nem.core.serialization.BinarySerializer;
 import org.nem.core.serialization.Deserializer;
 
