@@ -15,10 +15,10 @@ Create a app.properties file on your classpath and add the following:
 
 ```properties
 
-node.endpoint.networkname=mijinnet
+node.endpoint.networkname=testnet
 node.endpoint.protocol=http
-node.endpoint.uri=a1.nem.foundation
-node.endpoint.port=7895
+node.endpoint.uri=<testnet node>
+node.endpoint.port=7890
 ```
 
 <h4>Encode and Gzip Swift File/Text</h4>
